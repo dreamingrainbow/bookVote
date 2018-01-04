@@ -25,7 +25,32 @@ User
 		  AUTHOR:STRING,
 		  VOTES:{UP:0,DOWN:0}
 		 }
-
+``` JavaScript
+[
+    {
+        "BOOK_ID": null,
+        "ISBN": null,
+        "SUBJECT": null,
+        "AUTHOR": null,
+        "TITLE": null,
+        "VOTES": {
+            "UP": 0,
+            "DOWN": 0
+        }
+    },
+    {
+        "BOOK_ID": "47c77d9d-3b2e-4b56-9257-34d63090aa82",
+        "ISBN": "SOM-NUM-4555",
+        "SUBJECT": "MATH",
+        "AUTHOR": "Test_@",
+        "TITLE": "Test_@",
+        "VOTES": {
+            "UP": 0,
+            "DOWN": 0
+        }
+    }
+]
+```
 /API/Book/:id
 	GET/POST/PUT/DELETE
 		{ 
