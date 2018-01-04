@@ -2,28 +2,28 @@
 
 **HOMEPAGE**
 
-**SEARCH**
-    → Search Field
-        — Filters: Subject | Title | Author | ISBN
-    → Search Results
-        — In order (descending) by votes
+**SEARCH**  
+* Search Field  
+┗ Filters: Subject | Title | Author | ISBN
+* Search Results  
+┗ In order (descending) by votes
 
 **ADD | UPDATE | DELETE | VOTES**
 
 **USER**
-    → Register
-    → Verify
-    → Login
+* Register
+* Verify
+* Login
 
 # Secondary (Optional)
 
 **SEARCH**
-    → Search Results
-        — Book Images
+* Search Results  
+┗ Book Images
 
 **USER**
-    → Comments
-    → Book Reviews
+* Comments
+* Book Reviews
 
 # API End Points
 
