@@ -42,6 +42,7 @@
 ```
 ```
 /API/Vote
+<<<<<<< HEAD
   POST
     {
       bookId,
@@ -50,6 +51,14 @@
     }
 ```
 ```
+=======
+	POST
+		{
+		  BOOK_ID,
+		  VOTE: up | down
+		}
+
+>>>>>>> 9986982b9b305b1911f60fe21337d46166045af9
 /API/User/Add
 ```
 ```
