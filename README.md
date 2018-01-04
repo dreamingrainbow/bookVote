@@ -4,9 +4,9 @@
 
 **SEARCH**  
 * Search Field  
-┗ Filters: Subject | Title | Author | ISBN  
+┗ Filters: Subject | Title | Author | ISBN
 * Search Results  
-┗ In order (descending) by votes  
+┗ In order (descending) by votes
 
 **ADD | UPDATE | DELETE | VOTES**
 
