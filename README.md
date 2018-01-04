@@ -1,16 +1,20 @@
 # What is our MVP?
 
-## ISBN
+**ISBN**
 
-## TITLE
+**TITLE**
 
-## SUBJECT
+**SUBJECT**
 
-## AUTHOR
+**AUTHOR**
 
-## Search | Add | Update | Delete | Vote
+**Search | Add | Update | Delete | Vote**
 
-## User | Register | Verify | Login
+**User | Register | Verify | Login**
+
+__
+
+# API End Points
 
 ```
 /API/Search/{All|ISBN|TITLE|SUBJECT|AUTHOR}/:query
