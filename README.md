@@ -1,17 +1,29 @@
 # What is our MVP?
 
-**ISBN**
+**HOMEPAGE**
 
-**TITLE**
+**SEARCH**
+    → Search Field
+        — Filters: Subject | Title | Author | ISBN
+    → Search Results
+        — In order (descending) by votes
 
-**SUBJECT**
+**ADD | UPDATE | DELETE | VOTES**
 
-**AUTHOR**
+**USER**
+    → Register
+    → Verify
+    → Login
 
-**Search | Add | Update | Delete | Vote**
+# Secondary
 
-**User | Register | Verify | Login**
+**SEARCH**
+    → Search Results
+        — Book Images
 
+**USER**
+    → Comments
+    → Book Reviews
 
 # API End Points
 
