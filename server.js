@@ -23,6 +23,10 @@ const book = {
     VOTES:{UP:0,DOWN:0}
    };
 books.push(book);
+let Users = [];
+let User = {
+    USERNAME:null
+}
 
 server.get('/', (req, res) => {
     res.send('You Have Reached the API');
@@ -34,6 +38,31 @@ server.get('/API/Search/:filter/:query', (req, res) => {
 
 server.get('/API/Books', (req, res) => {
     res.json(books);
+});
+
+server.get('/API/User/:username', (req, res) => {
+    if(req.params.username !== undefined) {
+        let _user = users.filter( user => user.USERNAME = req.params.username);
+        if(_user.length === 0 ){
+            res.json({});
+        } else {
+            res.json(_user[0]);
+        }        
+    } else {
+        sendUserError('Error: Parameter Missing. Username Required. GET /API/User/:username',res);
+    }
+});
+
+server.post('/API/User', (req, res) => {
+    if(req.body.USERNAME !== undefined) {
+        let _user = Object.create(User);
+        Object.assign(_user, User);
+        _user.USERNAME = req.body.USERNAME;
+        Users.push(_user);
+        res.json(_user);
+    } else {
+        sendUserError('Error: Parameter Missing. Username Required. GET /API/User',res);
+    }
 });
 
 server.get('/API/Book/:id', (req, res) => {
