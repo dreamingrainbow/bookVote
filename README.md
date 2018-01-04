@@ -15,7 +15,7 @@
     → Verify
     → Login
 
-# Secondary
+# Secondary (Optional)
 
 **SEARCH**
     → Search Results
