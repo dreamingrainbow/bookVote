@@ -12,7 +12,6 @@
 
 **User | Register | Verify | Login**
 
-__
 
 # API End Points
 
