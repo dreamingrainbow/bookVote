@@ -5,6 +5,21 @@ const cors = require('cors');
 const uuid = require('node-uuid');
 const { createEngine } = require('express-react-views');
 const server = express();
+const MongoClient = require('mongodb').MongoClient;
+const db;
+
+const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
+
+MongoClient.connect(URL, function (err, database) {
+    if (err) return
+
+    const myAwesomeDB = database.db('heroku_3d3d8n74')
+    dogsCol.find().toArray(function (err, result) {
+        if (err) throw err
+        console.log(result)
+    })
+})
+
 server.use(bodyParser.json());
 server.use(cors());
 
