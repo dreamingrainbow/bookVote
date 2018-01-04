@@ -39,9 +39,8 @@ User
 /API/Vote
 	POST
 		{
-		  bookId,
-		  userId,
-		  up | down
+		  BOOK_ID,
+		  VOTE: up | down
 		}
 
 /API/User/Add
