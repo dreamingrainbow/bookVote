@@ -208,9 +208,13 @@ server.post('/API/Vote', (req, res) => {
         return sendUserError('Error: Parameter Missing. Book Id required.', res);
     }
 });
-
-        
-server.listen(3333, err => {
-    if (err) console.log(err);
-    console.log(`server is listening on port 3333`);
-});
+let db;
+const MongoClient = require('mongodb').MongoClient;
+MongoClient.connect('mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74', (err, database) => {
+    if (err) return console.log(err)
+    db = database
+    server.listen(3333, err => {
+        if (err) console.log(err);
+        console.log(`server is listening on port 3333`);
+    });    
+});     
