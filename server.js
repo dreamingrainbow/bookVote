@@ -13,7 +13,7 @@ const sendUserError = (msg, res) => {
   res.json({ Error: msg });
   return;
 };
-const books = [];
+let books = [];
 const book = { 
     BOOK_ID:null,
     ISBN:null,
@@ -38,7 +38,7 @@ server.get('/API/Books', (req, res) => {
 
 server.get('/API/Book/:id', (req, res) => {
     if (req.param.id !== undefined) {
-        let _book = books.filter( book => book.BOOK_ID === id);
+        let _book = books.filter( book => book.BOOK_ID === req.param.id);
         if(_book.length !== 0) {
             _book[0].RESPONSE = ['Success','Book found!'];
             _book = _book[0];
@@ -86,7 +86,7 @@ server.post('/API/Book', (req, res) => {
 
 server.put('/API/Book/:id', (req, res) => {
     if (req.param.id !== undefined) {
-        let _book = books.filter( book => book.BOOK_ID === id);
+        let _book = books.filter( book => book.BOOK_ID === req.param.id);
         if(_book.length !== 0) {
             if(req.body.ISBN !== undefined) {
                 _book.ISBN = req.body.ISBN;
@@ -115,29 +115,52 @@ server.put('/API/Book/:id', (req, res) => {
 });
 
 server.delete('/API/Book/:id', (req, res) => {
-    res.json(
-        { 
-            BOOK_ID:null,
-            ISBN:null,
-            SUBJECT:null,
-            AUTHOR:null,
-            VOTES:{UP:0,DOWN:0},
-            RESPONSE: ['Success' | 'Error', "Message"]  
+    if (req.param.id !== undefined) {
+        let _book = books.filter( book => book.BOOK_ID === req.param.id);
+        if(_book.length !== 0) {
+            books = books.filter( book => book.BOOK_ID !== req.param.id);
+            _book[0].RESPONSE = ['Success','Book removed!'];
+            _book = _book[0];
+        } else {
+            _book = Object.create(book);
+            _book[0].RESPONSE = ['Error','Book could not be removed!'];
         }
-    );
+        res.json(
+            _book
+        );
+    } else {
+        sendUserError('Error: Parameter Missing. Book Id required.', res);
+    }
 });
 
 server.post('/API/Vote', (req, res) => {
-    res.json(
-        { 
-            BOOK_ID:null,
-            ISBN:null,
-            SUBJECT:null,
-            AUTHOR:null,
-            VOTES:{UP:0,DOWN:0},
-            RESPONSE: ['Success' | 'Error', "Message"]  
+    if(req.body.BOOK_ID !== undefined) {
+        let _book = books.filter( book => book.BOOK_ID === req.body.BOOK_ID);
+        if(_book.length !== 0) {
+            if(req.body.VOTE !== undefined) {                    
+                if(req.body.VOTE === 'UP') {
+                    _book[0].VOTES.UP++;
+                    _book[0].RESPONSE = ['Success','You up voted a book!'];
+                } else if ( req.body.VOTE === 'DOWN' ) {
+                    _book[0].VOTES.DOWN++;
+                    _book[0].RESPONSE = ['Success','You down voted a book!'];
+                } else {
+                    _book[0].RESPONSE = ['Success','Your vote did not count!'];
+                }
+            } else {
+                return sendUserError('Error: Parameter Missing. Book Id required.', res);
+            }
+        } else {
+            _book = Object.create(book);
+            _book[0].RESPONSE = ['Error','Could not cast your vote!'];
         }
-    );
+        res.json(
+            _book
+        );           
+    } else {
+        return sendUserError('Error: Parameter Missing. Book Id required.', res);
+    }
+
 });
 
         
