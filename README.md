@@ -17,7 +17,8 @@
 
 ```
 /API/Search/{All|ISBN|TITLE|SUBJECT|AUTHOR}/:query
-
+```
+```
 /API/Books/
   return Array if Book Objects
     {
@@ -42,7 +43,6 @@
 ```
 ```
 /API/Vote
-<<<<<<< HEAD
   POST
     {
       bookId,
@@ -51,14 +51,6 @@
     }
 ```
 ```
-=======
-	POST
-		{
-		  BOOK_ID,
-		  VOTE: up | down
-		}
-
->>>>>>> 9986982b9b305b1911f60fe21337d46166045af9
 /API/User/Add
 ```
 ```
