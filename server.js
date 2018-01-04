@@ -65,7 +65,7 @@ server.post('/API/User', (req, res) => {
             Object.assign(_user, User);
             _user.USER_ID = uuid.v4();
             _user.USERNAME = req.body.USERNAME;
-            _user.PASSWORD = req.body.PASSWORD;
+            _user.PASSWORD = req.body.PASSWORD || null;
             Users.push(_user);
             res.json(_user);
         } else {
