@@ -27,7 +27,8 @@
       AUTHOR: STRING,
       VOTES: { UP: 0, DOWN: 0 }
      }
-
+```
+```
 /API/Book/:id
   GET/POST/PUT/DELETE
     {
@@ -38,7 +39,8 @@
       VOTES: { UP: 0, DOWN: 0 },
       RESPONSE: [Success | Error, "Message"]
      }
-
+```
+```
 /API/Vote
   POST
     {
@@ -46,8 +48,10 @@
       userId,
       up | down
     }
-
+```
+```
 /API/User/Add
-
+```
+```
 /API/User/Delete
 ```
