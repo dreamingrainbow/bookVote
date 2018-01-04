@@ -1,5 +1,4 @@
 .App {
-  background-color: #d7cec7;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -12,7 +11,6 @@
   background-color: #c09f80;
   width: 90vw;
   height: 25vh;
-  border: 1px solid #565656;
   border-radius: 2em;
 }
 
@@ -52,12 +50,3 @@
   color: silver;
 }
 
-.HomePageDisplay {
-  margin: 1em;
-  display: flex;
-  flex-direction: column;
-  background-color: #c09f80;
-  width: 90vw;
-  height: 65vh;
-  border-radius: 2em;
-}
