@@ -3,8 +3,8 @@ import './App.css';
 import './index.css';
 import HomeNavBar from './components/homeNavBar/homeNavBar';
 import { withRouter, Switch, Route } from 'react-router-dom'; 
-import SignUp from './components/users/SignUp';
-import SignIn from './components/users/SignIn';
+import SignUp from './components/users/signup';
+import SignIn from './components/users/signin';
 import PageDisplay from './components/homepageDisplay/homepageDisplay';
 
 
