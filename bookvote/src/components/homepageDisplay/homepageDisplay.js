@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter} from 'react-router-dom';
 import Search from '../search/Search';
 
 class PageDisplay extends Component {
@@ -14,4 +13,4 @@ class PageDisplay extends Component {
   }
 }
 
-export default withRouter(PageDisplay);
+export default PageDisplay;

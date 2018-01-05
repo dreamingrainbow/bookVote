@@ -10,7 +10,6 @@
   justify-content: center;
   background-color: #c09f80;
   width: 90vw;
-  height: 25vh;
   border-radius: 2em;
 }
 
@@ -19,7 +18,13 @@
   justify-content: center;
   color: #76323f;
   width: 90vw;
-  height: 60vh;
+}
+
+.HomeHeader h1 {
+  font-size: 4em;
+  font-weight: 700;
+  color:#565656;
+  text-shadow: .02em .02em sienna; 
 }
 
 .LowerButtonStrip {
@@ -27,16 +32,15 @@
   flex-direction: row;
   justify-content: center;
   width: 90vw;
-  height: 35vh;
+  height: 15vh;
 }
 
 .button {
-  margin: 1em;
+  margin: .25em;
   display: flex;
   justify-content: center;
   background-color: #565656;
   width: 10vw;
-  height: 5vh;
   border: 1px solid silver;
   border-radius: 2em;
 }
@@ -72,11 +76,23 @@
   margin: auto;
 }
 
-input,select {
+input,select,button {
   background-color: #565656;
   border: 1px solid silver;
   border-radius: 2em;
   font-size: 2em;
   margin-left: .25em;
   padding-left: .25em;
+  padding-right: .35em;
+}
+
+.upVotes, .downVotes {
+  padding-bottom: .35em;
+}
+
+label {
+  font-size: 2em;
+  font-weight: 700;
+  color:#565656;
+  text-shadow: .02em .02em sienna; 
 }
