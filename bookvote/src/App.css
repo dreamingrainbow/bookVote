@@ -1,28 +1,97 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.HomeNavBarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #c09f80;
+  width: 90vw;
+  height: 25vh;
+  border-radius: 2em;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.HomeHeader {
+  display: flex;
+  justify-content: center;
+  color: #76323f;
+  width: 90vw;
+  height: 60vh;
 }
 
-.App-title {
-  font-size: 1.5em;
+.LowerButtonStrip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90vw;
+  height: 35vh;
 }
 
-.App-intro {
-  font-size: large;
+.button {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+  background-color: #565656;
+  width: 10vw;
+  height: 5vh;
+  border: 1px solid silver;
+  border-radius: 2em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.buttonText {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: silver;
+}
+
+.PageDisplay {
+  display: flex;
+  justify-content: center;
+  background-color: #c09f80;
+  width: 90vw;
+  height: 100vh;
+  border-radius: 2em;
+  margin-top: 1em;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #565656;
+  height: 75vh;
+  width: 75vw;
+  border:1px solid silver;
+  border-radius: 2em;
+  margin: auto;
+}
+
+.doubleImageStrip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color:  #d7cec7;
+  width: 55vw;
+  height: 35vh;
+  border-radius: 2em;
+  margin: auto;
+}
+
+.imageBox {
+  height: 75%;
+  width: 45%;
+  border: 1px solid grey;
+  margin: auto;
+}
+
+#books {
+  background-image: url('./images/books.jpg');
+  background-repeat: no-repeat;
 }
