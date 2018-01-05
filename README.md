@@ -32,6 +32,11 @@
 * ❌ Comments
 * ❌ Book Reviews
 
+**MISC**
+* ❌ Styling
+* ❌ Amazon Referral Links
+* ❌ Migrate to Redux
+
 # API End Points
 
 ### Search — Returns books from search query
@@ -115,3 +120,21 @@
     }
 ]
 ```
+
+# The Team
+### Sean Valdivia
+* Home Page Components
+* Front End
+### Anthony Tweed
+* Sign In / Sign Up
+* Front End
+### Frank Faustino
+* Wiki
+* Search
+* Front End
+### Neil Barduson
+* Server setup
+* MongoDB Integration
+### Michael Dennis
+* Organizor
+* Initial API Development
