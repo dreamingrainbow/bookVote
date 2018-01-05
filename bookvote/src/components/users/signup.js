@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { axios } from 'axios';
-import { withRouter} from 'react-router-dom';
-//import SignIn from './sign-in/signin.js';
+import { withRouter } from 'react-router-dom';
+import url from '../../config';
 
 class SignUp extends Component {
   constructor() {
@@ -21,15 +21,16 @@ class SignUp extends Component {
   handleInputpassword(e) {
     this.setState({ password: e.target.value });
   }
-  saveUser() {
-    // create user variable if saving to a database
-    // const newUser = {username: this.state.username, password: this.state.password};
-    //**need to see where this goes to on the serverside**
+  saveUser(e) {
+    e.preventDefault();
+    // create user variable to save to database
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
     axios
-      .post('/User', {
-        username: this.state.username,
-        password: this.state.password
-      })
+      .post(`${url}/User/Add`, newUser)
       .then(function(response) {
         console.log(response);
       })

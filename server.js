@@ -67,7 +67,7 @@ server.get('/API/Search/:filter/:query', (req, res) => {
             q.TITLE = req.params.query;
             break;
     }
-    db.collection('books').find(q).toArray((err, _book) => {
+    db.collection('books').find(q).sort({ "VOTES.UP" : -1 }).toArray((err, _book) => {
         if(_book.length === 0) {
             _book = Object.create(book);
             _book.RESPONSE = ['Error','No Books found fitting your search!'];

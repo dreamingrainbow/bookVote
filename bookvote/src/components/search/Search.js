@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchResult from './SearchResult.js';
+import url from '../../config';
 import axios from 'axios';
 
 class Search extends Component {
@@ -25,7 +26,7 @@ class Search extends Component {
 
   handleSubmit(event) {
     if (event.which === 13) {
-      axios.get(`http://localhost:3333/API/Search/${this.state.filter}/${this.state.search}`)
+      axios.get(`${url}/API/Search/${this.state.filter}/${this.state.search}`)
         .then(res => this.setState({ response: res.data }))
         .catch(err => console.log(err));
     }
