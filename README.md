@@ -115,3 +115,16 @@
     }
 ]
 ```
+
+
+OUR TEAM :
+Sean Valdivia
+	Home Page Components Front End
+Anthony Tweed
+	Sign In / Sign Up Front End
+Frank Faustino
+	Wiki / Search Front End
+Neil Barduson
+	Server setup, Mongo Integration
+Michael Dennis
+	Organizor, Initial API Development
