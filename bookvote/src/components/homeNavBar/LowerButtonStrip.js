@@ -6,6 +6,7 @@ class LowerButtonStrip extends Component {
     return (
       <div className = "LowerButtonStrip">
         <NavLink to="/" className="button" activeClassName="button--active"><p className="buttonText">Home</p></NavLink>
+        <NavLink to="/Add-A-Book" className="button" activeClassName="button--active"><p className="buttonText">Add Book</p></NavLink>
         <NavLink to="/SignUp" className="button" activeClassName="button--active"><p className="buttonText">SignUp</p></NavLink>
         <NavLink to="/SignIn" className="button" activeClassName="button--active"><p className="buttonText">SignIn</p></NavLink>
       </div>

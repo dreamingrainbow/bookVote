@@ -56,7 +56,6 @@
   justify-content: center;
   background-color: #c09f80;
   width: 90vw;
-  height: 100vh;
   border-radius: 2em;
   margin-top: 1em;
 }
@@ -67,10 +66,17 @@
   justify-content: center;
   background-color: #565656;
   background-image: url('./images/heapsOfBooks.jpg');
-  height: 75vh;
   width: 75vw;
   border:1px solid silver;
   border-radius: 2em;
   margin: auto;
 }
 
+input,select {
+  background-color: #565656;
+  border: 1px solid silver;
+  border-radius: 2em;
+  font-size: 2em;
+  margin-left: .25em;
+  padding-left: .25em;
+}

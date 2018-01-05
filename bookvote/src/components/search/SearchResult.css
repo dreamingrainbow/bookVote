@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  height: 14vh;
   width: 75vw;
   background-color: aliceblue;
   border-bottom: #2196f3 solid 1px;
@@ -11,8 +10,7 @@
 .imageContainer {
   display: flex;
   align-self: flex-start;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 10px;
   height: 250px;
   width: 220px;
 }
@@ -88,4 +86,10 @@
 
 .bookTitle {
   font-size: 3em;
+}
+
+.Search-header {
+  text-align: center;
+  background-color: #2195f359;
+  border-radius: 2em;
 }
