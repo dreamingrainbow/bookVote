@@ -47,13 +47,13 @@ export default class AddBook extends Component {
             <form method="post" onSubmit={this.handleSubmit}>
                 {this.state && this.state.error ? `An Error occured :  ${this.state.error}` : ''}
                 <label>ISBN</label>
-                <input type="text" name="isbn" onChange={this.handleChange}/>
+                <input type="text" name="isbn" onChange={this.handleChange}/><br/>
                 <label>TITLE</label>
-                <input type="text" name="title" onChange={this.handleChange}/>
+                <input type="text" name="title" onChange={this.handleChange}/><br/>
                 <label>SUBJECT</label>
-                <input type="text" name="subject" onChange={this.handleChange}/>
+                <input type="text" name="subject" onChange={this.handleChange}/><br/>
                 <label>AUTHOR</label>
-                <input type="text" name="author" onChange={this.handleChange}/>
+                <input type="text" name="author" onChange={this.handleChange}/><br/>
                 <button type="submit">Submit</button>
                 {this.state && this.state.response ? `Response :  ${this.state.response} ${console.log(this.state.response)}` : ''}
             </form>

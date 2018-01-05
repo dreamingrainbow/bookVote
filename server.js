@@ -66,6 +66,8 @@ server.get('/API/Search/:filter/:query', (req, res) => {
         case 'TITLE':
             q.TITLE = req.params.query;
             break;
+        default:
+            q.SUBJECT = '';
     }
     db.collection('books').find(q).sort({ "VOTES.UP" : -1 }).toArray((err, _book) => {
         if(_book.length === 0) {
