@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import url from '../../config';
 export default class AddBook extends Component {
     constructor(){
         super();
@@ -26,7 +27,7 @@ export default class AddBook extends Component {
             SUBJECT:this.state.subject,
             AUTHOR:this.state.author
         };
-        axios.post('http://localhost:3333/API/book', newBook ).then((res)=>{
+        axios.post(`${url}/API/book`, newBook ).then((res)=>{
             this.setState({
                 isbn: this.state.isbn,
                 title: this.state.title,
