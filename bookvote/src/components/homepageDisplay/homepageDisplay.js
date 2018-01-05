@@ -5,8 +5,14 @@ class PageDisplay extends Component {
     return (
       <div className="PageDisplay">
         <div className="pageContainer">
-          <div className="doubleImageStrip"></div>
-          <div className="doubleImageStrip"></div>
+          <div className="doubleImageStrip">
+            <div className="imageBox"></div>
+            <div className="imageBox"></div>
+          </div>
+          <div className="doubleImageStrip">
+            <div className="imageBox"></div>
+            <div className="imageBox"></div>
+          </div>
         </div>
       </div>
     )

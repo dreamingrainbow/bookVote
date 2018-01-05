@@ -64,10 +64,29 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: #565656;
   height: 75vh;
   width: 75vw;
   border:1px solid silver;
   border-radius: 2em;
+  margin: auto;
+}
+
+.doubleImageStrip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color:  #d7cec7;
+  width: 55vw;
+  height: 35vh;
+  border-radius: 2em;
+  margin: auto;
+}
+
+.imageBox {
+  height: 75%;
+  width: 45%;
+  border: 1px solid grey;
   margin: auto;
 }

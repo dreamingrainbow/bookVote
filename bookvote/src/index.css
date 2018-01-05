@@ -1,5 +1,9 @@
 body {
   background-color: #d7cec7;
+}
+
+#root {
+  background-color: #d7cec7;
   display: flex;
   justify-content: center;
 }
