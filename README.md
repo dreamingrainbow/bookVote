@@ -12,15 +12,15 @@
 
 **BOOKS**
 * Add ☑️
-* Delete ❌
-* Update ❌
+* Delete ☑️
+* Update ☑️
 
 **VOTES** ☑️
 
 **USER**
-* Register ❌
+* Register ☑️
 * Verify ❌
-* Login ❌
+* Login ☑️
 
 # Secondary (Optional)
 
