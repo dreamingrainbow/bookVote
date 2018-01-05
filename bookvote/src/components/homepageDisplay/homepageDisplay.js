@@ -5,7 +5,8 @@ class HomePageDisplay extends Component {
     return (
       <div className="HomePageDisplay">
         <div className="homeImageContainer">
-          
+          <div className="doubleImageStrip"></div>
+          <div className="doubleImageStrip"></div>
         </div>
       </div>
     )
