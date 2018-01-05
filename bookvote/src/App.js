@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './index.css';
 import HomeNavBar from './components/homeNavBar/homeNavBar';
-import HomePageDisplay from './components/homepageDisplay/homepageDisplay';
+import PageDisplay from './components/homepageDisplay/homepageDisplay';
 
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <HomeNavBar />
-        <HomePageDisplay />
+        <PageDisplay />
       </div>
     );
   }

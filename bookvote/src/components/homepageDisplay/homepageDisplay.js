@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class HomePageDisplay extends Component {
+class PageDisplay extends Component {
   render() {
     return (
-      <div className="HomePageDisplay">
-        <div className="homeImageContainer">
+      <div className="PageDisplay">
+        <div className="pageContainer">
           <div className="doubleImageStrip"></div>
           <div className="doubleImageStrip"></div>
         </div>
@@ -13,4 +13,4 @@ class HomePageDisplay extends Component {
   }
 }
 
-export default HomePageDisplay;
+export default PageDisplay;
