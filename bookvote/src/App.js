@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import './index.css';
 import HomeNavBar from './components/homeNavBar/homeNavBar';
+import { withRouter, Switch, Route } from 'react-router-dom'; 
+import SignUp from './components/users/signup';
+import SignIn from './components/users/signin';
 import PageDisplay from './components/homepageDisplay/homepageDisplay';
 
 
@@ -10,10 +13,14 @@ class App extends Component {
     return (
       <div className="App">
         <HomeNavBar />
-        <PageDisplay />
+        <Switch>
+          <Route path="/" component={PageDisplay} exact />
+          <Route path="/SignUp" component={SignUp} exact />
+          <Route path="/SignIn" component={SignIn} exact />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

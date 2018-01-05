@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SearchResult from './SearchResult.js';
+import axios from 'axios';
 
 class Search extends Component {
   constructor() {
@@ -18,17 +20,8 @@ class Search extends Component {
         <header className="Search-header">
           <h1 className="Search-title">Search books</h1>
         </header>
-        <p>Subject</p>
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} />
-
-        <p>Title</p>
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} />
-
-        <p>ISBN</p>
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} />
-
-        <p>Author</p>
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} />
+        {/* <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} /> */}
+        <SearchResult />
       </div>
     );
   }
