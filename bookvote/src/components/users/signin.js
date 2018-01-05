@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { axios } from 'axios';
 import { withRouter } from 'react-router-dom';
+import url from '../../config';
 
 class SignIn extends Component {
   constructor() {
@@ -20,12 +21,16 @@ class SignIn extends Component {
   handleInputpassword(e) {
     this.setState({ password: e.target.value });
   }
-  signIn() {
+  signIn(e) {
+    e.preventDefault();
+    // create user variable to save to database
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
     axios
-      .post('/signin', {
-        username: this.state.username,
-        password: this.state.password
-      })
+      .post(`${url}/User`, user)
       .then(function(response) {
         console.log(response);
       })
