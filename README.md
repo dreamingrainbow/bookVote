@@ -1,4 +1,4 @@
-![book vote](https://i.imgur.com/oYmqort.png)
+![book vote](https://i.imgur.com/sWNedkn.png)
 
 # What is our MVP?
 
@@ -10,7 +10,12 @@
 * Search Results  
 ┗ In order (descending) by votes
 
-**ADD | UPDATE | DELETE | VOTES**
+**BOOKS**
+* Add
+* Delete
+* Update
+
+**VOTES**
 
 **USER**
 * Register
@@ -29,9 +34,12 @@
 
 # API End Points
 
+### Search — Returns books from search query
 ```
 /API/Search/{All|ISBN|TITLE|SUBJECT|AUTHOR}/:query
 ```
+
+### Books — Returns an array of all books in the database
 ```
 /API/Books/
   return Array if Book Objects
@@ -43,6 +51,8 @@
       VOTES: { UP: 0, DOWN: 0 }
      }
 ```
+
+### Books — Returns book object by ID
 ```
 /API/Book/:id
   GET/POST/PUT/DELETE
@@ -55,6 +65,8 @@
       RESPONSE: [Success | Error, "Message"]
      }
 ```
+
+### Voting System
 ```
 /API/Vote
   POST
@@ -64,9 +76,13 @@
       up | down
     }
 ```
+
+### Users — Add user
 ```
 /API/User/Add
 ```
+
+### Users — Delete user
 ```
 /API/User/Delete
 ```
