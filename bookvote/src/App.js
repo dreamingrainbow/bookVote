@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App">
         <HomeNavBar />
         <Switch>
-          <Route path="/Home" component={PageDisplay} exact />
+          <Route path="/" component={PageDisplay} exact />
           <Route path="/SignUp" component={SignUp} exact />
           <Route path="/SignIn" component={SignIn} exact />
         </Switch>
