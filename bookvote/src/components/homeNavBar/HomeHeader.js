@@ -4,7 +4,7 @@ class HomeHeader extends Component {
   render() {
     return (
       <div className="HomeHeader">
-        <h1>Book Vote!</h1>
+        <img src="https://i.imgur.com/sWNedkn.png" />
       </div>
     )
   }

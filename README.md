@@ -42,7 +42,7 @@
 ### Books — Returns an array of all books in the database
 ```
 /API/Books/
-  return Array if Book Objects
+  return Array of Book Objects
     {
       BOOK_ID: STRING,
       ISBN: STRING,
@@ -52,7 +52,7 @@
      }
 ```
 
-### Books — Returns book object by ID
+### Books — Return, update, or delete book by ID
 ```
 /API/Book/:id
   GET/POST/PUT/DELETE
