@@ -67,12 +67,16 @@
 .upVotes {
   margin-right: 5px;
   color: blueviolet;
+  background-color: aliceblue;
+  border: none;
   text-decoration: none;
 }
 
 .downVotes {
   margin-left: 5px;
   color: red;
+  background-color: aliceblue;
+  border: none;
   text-decoration: none;
 }
 
