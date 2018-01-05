@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import url from '../../config';
 import './SearchResult.css';
 
 class SearchResult extends Component {
@@ -15,7 +16,7 @@ class SearchResult extends Component {
   }
 
   handleUpVote(event) {
-    axios.post('http://localhost:3333/API/Vote', {
+    axios.post(`${url}/API/Vote`, {
       "BOOK_ID": this.props.results.BOOK_ID,
       "VOTE": "UP"
     })
@@ -24,7 +25,7 @@ class SearchResult extends Component {
   }
 
   handleDownVote(event) {
-    axios.post('http://localhost:3333/API/Vote', {
+    axios.post(`${url}/API/Vote`, {
       "BOOK_ID": this.props.results.BOOK_ID,
       "VOTE": "DOWN"
     })
