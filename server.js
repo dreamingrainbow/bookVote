@@ -6,19 +6,25 @@ const uuid = require('node-uuid');
 const { createEngine } = require('express-react-views');
 const server = express();
 const MongoClient = require('mongodb').MongoClient;
-const db;
+const ObjectId = require('mongodb').ObjectId; 
+let db;
 
 const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
 
-MongoClient.connect(URL, function (err, database) {
-    if (err) return
+// MongoClient.connect(URL, function (err, database) {
+//     if (err) return
+//     db = database.db('heroku_3d3d8n74')
+// })
 
-    const myAwesomeDB = database.db('heroku_3d3d8n74')
-    dogsCol.find().toArray(function (err, result) {
-        if (err) throw err
-        console.log(result)
-    })
-})
+MongoClient.connect(URL, (err, database) => {
+    if (err) return console.log(err)
+    db = database.db('heroku_3d3d8n74');
+    // db.collection('books')
+    server.listen(3333, err => {
+        if (err) console.log(err);
+        console.log(`server is listening on port 3333`);
+    });    
+});    
 
 server.use(bodyParser.json());
 server.use(cors());
@@ -56,7 +62,9 @@ server.get('/API/Search/:filter/:query', (req, res) => {
 });
 
 server.get('/API/Books', (req, res) => {
-    res.json(books);
+    db.collection('books').find().toArray(function (err, results) {
+        res.send(results);
+    })
 });
 
 server.get('/API/User/:username', (req, res) => {
@@ -93,17 +101,20 @@ server.post('/API/User', (req, res) => {
 
 server.get('/API/Book/:id', (req, res) => {
     if (req.params.id !== undefined) {
-        let _book = books.filter( book => book.BOOK_ID === req.params.id);
-        if(_book.length !== 0) {
-            _book[0].RESPONSE = ['Success','Book found!'];
-            _book = _book[0];
-        } else {
-            _book = Object.create(book);
-            _book.RESPONSE = ['Error','Book not found!'];
-        }
-        res.json(
-            _book
-        );
+
+        db.collection('books').find({_id : ObjectId(req.params.id)}).toArray((err, _book) => {
+            if(_book.length !== 0) {
+                _book[0].RESPONSE = ['Success','Book found!'];
+                _book = _book[0];
+            } else {
+                _book = Object.create(book);
+                _book.RESPONSE = ['Error','Book not found!'];
+            }
+            res.send(
+                _book
+            );
+        });
+
     } else {
         sendUserError('Error: Parameter Missing. Book Id required. GET /API/Book/:id',res);
     }    
@@ -135,7 +146,8 @@ server.post('/API/Book', (req, res) => {
     } else {
         return sendUserError('Error: Parameter Missing. Title required. GET /API/Book', res);
     }
-    books.push(_book);
+
+    db.collection('books').insert(_book)
     let __book = Object.create(_book);
     Object.assign(__book, _book);
     __book.RESPONSE = ['Success','Book added!'];
@@ -146,28 +158,35 @@ server.post('/API/Book', (req, res) => {
 
 server.put('/API/Book/:id', (req, res) => {
     if (req.params.id !== undefined) {
-        let _book = books.filter( book => book.BOOK_ID === req.params.id);
-        if(_book.length !== 0) {
-            if(req.body.ISBN !== undefined) {
-                _book[0].ISBN = req.body.ISBN;
-            }
-            if(req.body.AUTHOR !== undefined) {
-                _book[0].AUTHOR = req.body.AUTHOR;
-            }
-            if(req.body.SUBJECT !== undefined) {
-                _book[0].SUBJECT = req.body.SUBJECT;
-            }
-            if(req.body.TITLE !== undefined) {
-                _book[0].TITLE = req.body.TITLE;
-            }
-            _book[0].RESPONSE = ['Success','Book update completed!'];
-            _book = _book[0];
-        } else {
-            _book = Object.create(book);
-            _book[0].RESPONSE = ['Error','Book could not be updated!'];
+        // let _book = books.filter( book => book.BOOK_ID === req.params.id);
+        const myquery = { _id: ObjectId(req.params.id) };
+        let newvalues = {};
+
+        if (req.body.ISBN !== undefined) {
+            newvalues.ISBN = req.body.ISBN;
         }
-        res.json(
-            _book
+        if (req.body.AUTHOR !== undefined) {
+            newvalues.AUTHOR = req.body.AUTHOR;
+        }
+        if (req.body.SUBJECT !== undefined) {
+            newvalues.SUBJECT = req.body.SUBJECT;
+        }
+        if (req.body.TITLE !== undefined) {
+            newvalues.TITLE = req.body.TITLE;
+        }
+
+        // on line 186 dont do redudant call
+        db.collection('books').findOneAndUpdate(
+            myquery,
+            { $set: newvalues },
+            { upsert: true, returnNewDocument: true }, 
+            (err, _book) => {
+                if (err) console.log(err);
+                // todo, fix this!
+                db.collection('books').find(myquery).toArray((err, result) => {
+                    res.send(result);
+                })
+            }
         );
     } else {
         sendUserError('Error: Parameter Missing. Book Id required. PUT /API/Book/:id');
@@ -176,19 +195,28 @@ server.put('/API/Book/:id', (req, res) => {
 
 server.delete('/API/Book/:id', (req, res) => {
     if (req.params.id !== undefined) {
-        let _book = books.filter( book => book.BOOK_ID === req.params.id);
-        if(_book.length !== 0) {
-            books = books.filter( book => book.BOOK_ID !== req.params.id);
-            _book[0].RESPONSE = ['Success','Book removed!'];
-            _book = _book[0];
-        } else {
-            _book = Object.create(book);
-            Object.assign(_book, book);
-            _book[0].RESPONSE = ['Error','Book could not be removed!'];
-        }
-        res.json(
-            _book
-        );
+        let tmpBook;
+
+        db.collection('books').find({ _id: ObjectId(req.params.id) }).toArray((err, _book) => {
+            if (err) console.log(err);
+            tmpBook = _book;
+        })
+        console.log(db.collection('books').remove({_id : ObjectId(req.params.id)}, (err, _book) => {
+            if (err) console.log(err);
+            res.send(tmpBook);
+        }));
+        // if(_book.length !== 0) {
+        //     books = books.filter( book => book.BOOK_ID !== req.params.id);
+        //     newvalues.RESPONSE = ['Success','Book removed!'];
+        //     _book = newvalues;
+        // } else {
+        //     _book = Object.create(book);
+        //     Object.assign(_book, book);
+        //     newvalues.RESPONSE = ['Error','Book could not be removed!'];
+        // }
+        // res.json(
+        //     _book
+        // );
     } else {
         sendUserError('Error: Parameter Missing. Book Id required.  DELETE /API/Book/:id', res);
     }
@@ -200,13 +228,13 @@ server.post('/API/Vote', (req, res) => {
         if(_book.length !== 0) {
             if(req.body.VOTE !== undefined) {                    
                 if(req.body.VOTE === 'UP') {
-                    _book[0].VOTES.UP++;
-                    _book[0].RESPONSE = ['Success','You up voted a book!'];
+                    newvalues.VOTES.UP++;
+                    newvalues.RESPONSE = ['Success','You up voted a book!'];
                 } else if ( req.body.VOTE === 'DOWN' ) {
-                    _book[0].VOTES.DOWN++;
-                    _book[0].RESPONSE = ['Success','You down voted a book!'];
+                    newvalues.VOTES.DOWN++;
+                    newvalues.RESPONSE = ['Success','You down voted a book!'];
                 } else {
-                    _book[0].RESPONSE = ['Success','Your vote did not count!'];
+                    newvalues.RESPONSE = ['Success','Your vote did not count!'];
                 }
             } else {
                 return sendUserError('Error: Parameter Missing. Book Id required.  POST /API/Vote', res);
@@ -214,7 +242,7 @@ server.post('/API/Vote', (req, res) => {
         } else {
             _book = Object.create(book);
             Object.assign(_book, book);
-            _book[0].RESPONSE = ['Error','Could not cast your vote!'];
+            newvalues.RESPONSE = ['Error','Could not cast your vote!'];
         }
         res.json(
             _book
@@ -223,13 +251,4 @@ server.post('/API/Vote', (req, res) => {
         return sendUserError('Error: Parameter Missing. Book Id required.', res);
     }
 });
-let db;
-const MongoClient = require('mongodb').MongoClient;
-MongoClient.connect('mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74', (err, database) => {
-    if (err) return console.log(err)
-    db = database
-    server.listen(3333, err => {
-        if (err) console.log(err);
-        console.log(`server is listening on port 3333`);
-    });    
-});     
+ 
