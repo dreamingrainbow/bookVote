@@ -6,21 +6,30 @@ class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      upVote: null,
-      downVote: null,
-      response: null
+      upVote: this.props.results.VOTES.UP,
+      downVote: this.props.results.VOTES.DOWN
     };
 
-    this.handleVote = this.handleVote.bind(this);
+    this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleDownVote = this.handleDownVote.bind(this);
   }
 
-  handleVote(event) {
+  handleUpVote(event) {
     axios.post('http://localhost:3333/API/Vote', {
-      "BOOK_ID": "bookID",
+      "BOOK_ID": this.props.results.BOOK_ID,
       "VOTE": "UP"
     })
-      .then((res) => console.log(res.data.VOTES.UP)
-      ).catch((err) => console.log(err));
+      .then((res) => this.setState({ upVote: res.data.VOTES.UP }))
+      .catch((err) => console.log(err));
+  }
+
+  handleDownVote(event) {
+    axios.post('http://localhost:3333/API/Vote', {
+      "BOOK_ID": this.props.results.BOOK_ID,
+      "VOTE": "DOWN"
+    })
+      .then((res) => this.setState({ downVote: res.data.VOTES.DOWN }))
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -30,10 +39,9 @@ class SearchResult extends Component {
     let bookAuthor = book.AUTHOR;
     let bookISBN = book.ISBN;
     let bookImage ='https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Clrs3.jpeg/220px-Clrs3.jpeg';
-    let upVote = book.VOTES.UP;
-    let downVote = book.VOTES.DOWN;
+    let upVote = this.state.upVote;
+    let downVote = this.state.downVote;
 
-    console.log(this.state.response);
     return (
       <div className="searchResultContainer">
         <div className="imageContainer">
@@ -41,10 +49,10 @@ class SearchResult extends Component {
         </div>
         <div className="bookDetails">
           <div className="votes">
-            <button className="upVotes">
-              <a href="#" onClick={this.handleVote}><span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span></a>
+            <button onClick={this.handleUpVote} name="upVote" className="upVotes">
+              <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
             </button>
-            <button className="downVotes">
+            <button onClick={this.handleDownVote} name="downVote" className="downVotes">
             <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
             </button>
           </div>
