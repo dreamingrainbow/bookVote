@@ -39,7 +39,7 @@ class SearchResult extends Component {
     let bookTitle = book.TITLE;
     let bookAuthor = book.AUTHOR;
     let bookISBN = book.ISBN;
-    let bookImage ='https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Clrs3.jpeg/220px-Clrs3.jpeg';
+    let bookImage ='https://onestopfiction.com/-res/img/book-placeholder.jpg';
     let upVote = this.state.upVote;
     let downVote = this.state.downVote;
 
