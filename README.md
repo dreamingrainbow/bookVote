@@ -6,31 +6,31 @@
 
 **SEARCH**
 * Search Field ☑️  
-┗ Filters: Subject | Title | Author | ISBN
+┗ Filters: Subject | Title | Author | ISBN ☑️
 * Search Results ☑️  
-┗ In order (descending) by votes
+┗ In order (descending) by votes ☑️
 
 **BOOKS**
 * Add ☑️
-* Delete
-* Update
+* Delete ❌
+* Update ❌
 
 **VOTES** ☑️
 
 **USER**
-* Register
-* Verify
-* Login
+* Register ❌
+* Verify ❌
+* Login ❌
 
 # Secondary (Optional)
 
 **SEARCH**
 * Search Results  
-┗ Book Images
+┗ Book Images ❌
 
 **USER**
-* Comments
-* Book Reviews
+* Comments ❌
+* Book Reviews ❌
 
 # API End Points
 
