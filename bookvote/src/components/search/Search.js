@@ -20,19 +20,12 @@ class Search extends Component {
       event.target.type === 'text' ? event.target.value : event.target.value;
     const name = event.target.name;
 
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
     if (event.which === 13) {
-      axios
-        .get(
-          `http://localhost:3333/API/Search/${this.state.filter}/${
-            this.state.search
-          }`
-        )
+      axios.get(`http://localhost:3333/API/Search/${this.state.filter}/${this.state.search}`)
         .then(res => this.setState({ response: res.data }))
         .catch(err => console.log(err));
     }
@@ -42,7 +35,7 @@ class Search extends Component {
     return (
       <SearchResult
         results={response}
-        key={Math.floor(Math.random() * (100 - 1))}
+        key={response._id}
       />
     );
   }
