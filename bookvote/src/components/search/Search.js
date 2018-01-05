@@ -55,30 +55,30 @@ class Search extends Component {
     return (
       <div className="Search">
         <header className="Search-header">
-          <h1 className="Search-title">Search books</h1>
+          <h1 className="Search-title" style={{display: 'inline'}}>Search books</h1>        
+        <div className="form" style={{ marginBottom: '10px',display: 'inline' }}>
+            <input
+              name="search"
+              type="text"
+              value={this.state.search}
+              onChange={this.handleChange}
+              onKeyDown={this.handleSubmit}
+            />
+            <select
+              name="filter"
+              value={this.state.filter}
+              onChange={this.handleChange}
+            >
+              <option value="SUBJECT">Subject</option>
+              <option value="TITLE">Title</option>
+              <option value="AUTHOR">Author</option>
+              <option value="ISBN">ISBN</option>
+            </select>
+          </div>
         </header>
-        <div className="form" style={{ marginBottom: '10px' }}>
-          <input
-            name="search"
-            type="text"
-            value={this.state.search}
-            onChange={this.handleChange}
-            onKeyDown={this.handleSubmit}
-          />
-          <select
-            name="filter"
-            value={this.state.filter}
-            onChange={this.handleChange}
-          >
-            <option value="SUBJECT">Subject</option>
-            <option value="TITLE">Title</option>
-            <option value="AUTHOR">Author</option>
-            <option value="ISBN">ISBN</option>
-          </select>
-        </div>
-        {this.state.response
-          ? this.createSearchResults(this.state.response)
-          : null}
+          {this.state.response
+            ? this.createSearchResults(this.state.response)
+            : null}
       </div>
     );
   }
