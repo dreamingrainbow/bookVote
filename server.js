@@ -58,7 +58,30 @@ server.get('/', (req, res) => {
 });
 
 server.get('/API/Search/:filter/:query', (req, res) => {
-    res.send('You Have Reached the API Search');
+    let q = {};
+    switch(req.params.filer) {
+        case 'SUBJECT':
+            q.SUBJECT = req.params.query;
+            break;
+        case 'ISBN':
+            q.ISBN = req.params.query;
+            break;
+        case 'AUTHOR':
+            q.AUTHOR = req.params.query;
+            break;
+        case 'TITLE':
+            q.TITLE = req.params.query;
+            break;
+    }
+    db.collection('books').find(q).toArray((err, _book) => {
+        if(_book.length === 0) {
+            _book = Object.create(book);
+            _book.RESPONSE = ['Error','No Books found fitting your search!'];
+        }
+        res.send(
+            _book
+        );
+    });
 });
 
 server.get('/API/Books', (req, res) => {
