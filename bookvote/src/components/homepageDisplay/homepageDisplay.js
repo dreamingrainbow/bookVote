@@ -6,8 +6,9 @@ class PageDisplay extends Component {
   render() {
     return (
       <div className="PageDisplay">
-        <Search />
-        {/* <div className="pageContainer"></div> */}
+        <div className="pageContainer">
+          <Search />
+        </div>
       </div>
     )
   }
