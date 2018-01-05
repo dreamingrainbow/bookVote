@@ -2,9 +2,10 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  height: 75vh;
+  height: 14vh;
   width: 75vw;
   background-color: aliceblue;
+  border-bottom: #2196f3 solid 1px;
 }
 
 .imageContainer {
@@ -18,8 +19,6 @@
 .votes {
   position: relative;
   align-self: flex-end;
-  /* right: 20px; */
-  /* margin-left: 10px; */
   margin-right: 20px;
   margin-top: 10px;
   font-size: 1.25em;
@@ -27,14 +26,44 @@
 }
 
 .hover {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  background-repeat: no-repeat;
-  background-size: 100% 0.1em;
-  background-position: 0 100%;
-  transition: background-size 0.25s ease-in;
+  position: relative;
+  font-weight: 300;
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease;
+  padding: 3px 0;
+  margin-bottom: 10px;
 }
-.hover:hover {
-  background-size: 100% 100%;
+
+/* .hover:hover {
+  color: #aaa;
+} */
+
+.hover:hover::after,
+.hover:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.hover::after,
+.hover::before {
+  content: '';
+  position: absolute;
+  top: calc(100% + 5px);
+  width: 0;
+  right: 0;
+  height: 3px;
+}
+
+.hover::before {
+  -webkit-transition: width .4s cubic-bezier(0.51, 0.18, 0, 0.88) .1s;
+  transition: width .4s cubic-bezier(0.51, 0.18, 0, 0.88) .1s;
+  background: #2196f3;
+}
+
+.hover::after {
+  -webkit-transition: width .2s cubic-bezier(0.29, 0.18, 0.26, 0.83);
+  transition: width .2s cubic-bezier(0.29, 0.18, 0.26, 0.83);
+  background: #F44336;
 }
 
 .upVotes {
@@ -53,7 +82,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* background-color: bisque; */
   margin-left: 40px;
   margin-top: 10px;
 }

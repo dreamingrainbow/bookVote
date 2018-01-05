@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './SearchResult.css';
 
-const SearchResult = () => {
-  let bookTitle = 'Introduction to Algorithms';
-  let bookAuthor = [
-    'Thomas H. Cormen',
-    'Charles E. Leiserson',
-    'Ronald Rivest',
-    'Clifford Stein'
-  ];
-  let bookISBN = '978-0-262-03384-8';
+const SearchResult = (props) => {
+  console.log(props.results)
+  const book = props.results;
+  let bookTitle = book.TITLE;
+  let bookAuthor = book.AUTHOR;
+  let bookISBN = book.ISBN;
   let bookImage = 'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Clrs3.jpeg/220px-Clrs3.jpeg';
-  let upVote = 160;
-  let downVote = 8;
+  let upVote = book.VOTES.UP;
+  let downVote = book.VOTES.DOWN;
 
   return (
     <div className="searchResultContainer">
@@ -24,7 +21,8 @@ const SearchResult = () => {
           <a href="#" className="downVotes">👎 <span className="hover">{downVote}</span></a>
         </div>
         <span className="bookTitle">{bookTitle}</span><br />
-        <span className="bookAuthor"><span style={{fontWeight: 700}}>Authors:</span> {bookAuthor.reduce((prev, curr) => [prev, ', ', curr])}</span><br />
+        <span className="bookAuthor"><span style={{fontWeight: 700}}>Authors:</span> {bookAuthor}</span><br />
+        {/* <span className="bookAuthor"><span style={{fontWeight: 700}}>Authors:</span> {bookAuthor.reduce((prev, curr) => [prev, ', ', curr])}</span><br /> */}
         <span className="bookISBN"><span style={{fontWeight: 700}}>ISBN:</span> {bookISBN}</span><br />
       </div>
     </div>
