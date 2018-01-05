@@ -5,32 +5,32 @@
 **HOMEPAGE** ☑️
 
 **SEARCH**
-* Search Field  ☑️
+* Search Field ☑️  
 ┗ Filters: Subject | Title | Author | ISBN
-* Search Results  ☑️
+* Search Results ☑️  
 ┗ In order (descending) by votes
 
 **BOOKS**
 * Add ☑️
-* Delete ☐
-* Update ☐
+* Delete
+* Update
 
 **VOTES** ☑️
 
 **USER**
-* Register ☐
-* Verify ☐
-* Login ☐
+* Register
+* Verify
+* Login
 
 # Secondary (Optional)
 
 **SEARCH**
-* Search Results ☐  
-┗ Book Images ☐
+* Search Results  
+┗ Book Images
 
 **USER**
-* Comments ☐
-* Book Reviews ☐
+* Comments
+* Book Reviews
 
 # API End Points
 
