@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { axios } from 'axios';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 //import SignIn from './sign-in/signin.js';
 
 class SignUp extends Component {
