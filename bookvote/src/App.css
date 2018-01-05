@@ -66,9 +66,11 @@
   flex-direction: column;
   justify-content: center;
   background-color: #565656;
+  background-image: url('./images/heapsOfBooks.jpg');
   height: 75vh;
   width: 75vw;
   border:1px solid silver;
   border-radius: 2em;
   margin: auto;
 }
+
