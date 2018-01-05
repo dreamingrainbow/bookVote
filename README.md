@@ -1,3 +1,5 @@
+![book vote](https://i.imgur.com/oYmqort.png)
+
 # What is our MVP?
 
 **HOMEPAGE**
