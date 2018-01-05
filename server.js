@@ -54,7 +54,7 @@ server.get('/', (req, res) => {
 
 server.get('/API/Search/:filter/:query', (req, res) => {
     let q = {};
-    switch(req.params.filer) {
+    switch(req.params.filter) {
         case 'SUBJECT':
             q.SUBJECT = req.params.query;
             break;
