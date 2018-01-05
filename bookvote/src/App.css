@@ -90,3 +90,8 @@
   border: 1px solid grey;
   margin: auto;
 }
+
+#books {
+  background-image: url('./images/books.jpg');
+  background-repeat: no-repeat;
+}
