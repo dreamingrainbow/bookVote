@@ -29,7 +29,7 @@ const sendUserError = (msg, res) => {
   res.json({ Error: msg });
   return;
 };
-let books = [];
+
 const book = { 
     BOOK_ID:null,
     ISBN:null,
@@ -38,15 +38,14 @@ const book = {
     TITLE:null,
     VOTES:{UP:0,DOWN:0}
    };
-books.push(book);
-let Users = [];
+
+
 let User = {
-    USER_ID:null,
     USERNAME:null,
     PASSWORD:null
 }
 
-Users.push(User);
+
 
 server.get('/', (req, res) => {
     res.send('You Have Reached the API');
@@ -85,14 +84,18 @@ server.get('/API/Books', (req, res) => {
     })
 });
 
-server.get('/API/User/:username', (req, res) => {
+server.post('/API/User/:username', (req, res) => {
     if(req.params.username !== undefined) {
-        let _user = users.filter( user => user.USERNAME = req.params.username);
-        if(_user.length === 0 ){
-            res.json({});
-        } else {
-            res.json(_user[0]);
-        }        
+        db.collection('users').find({ $and : [{ USERNAME : req.params.username}, {PASSWORD : req.body.PASSWORD }]}).toArray((err, _user) => {
+            if (_user.length === 0) {
+                sendUserError('Error: Invalid Login. GET /API/User/:username', res);
+            } else {
+                _user = {}
+                _user.USERNAME = req.params.username;
+                _user.REPONSE = ["Success", "Valid Login"];
+                res.send(_user);
+            }
+        });
     } else {
         sendUserError('Error: Parameter Missing. Username Required. GET /API/User/:username',res);
     }
@@ -100,18 +103,14 @@ server.get('/API/User/:username', (req, res) => {
 
 server.post('/API/User', (req, res) => {
     if(req.body.USERNAME !== undefined) {
-        let _user = users.filter( user => user.USERNAME = req.body.USERNAME);
-        if(_user.length === 0) {
             let _user = Object.create(User);
             Object.assign(_user, User);
-            _user.USER_ID = uuid.v4();
             _user.USERNAME = req.body.USERNAME;
             _user.PASSWORD = req.body.PASSWORD || null;
-            Users.push(_user);
+
+            db.collection('users').insert(_user);
+            _user.RESPONSE = ["Success", "User added"];
             res.json(_user);
-        } else {
-            sendUserError('Error: User exists. POST /API/User',res);
-        }
     } else {
         sendUserError('Error: Parameter Missing. Username Required. POST /API/User',res);
     }
