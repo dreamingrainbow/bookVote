@@ -124,17 +124,20 @@
 # The Team
 ### Sean Valdivia
 * Home Page Components
-* Front End
+* Front-End (React)
 ### Anthony Tweed
 * Sign In / Sign Up
-* Front End
+* Front-End (React)
 ### Frank Faustino
 * Wiki
 * Search
-* Front End
+* Votes
+* Front-End (React)
 ### Neil Barduson
-* Server setup
+* Express server setup
 * MongoDB Integration
+* Heroku deployment
 ### Michael Dennis
-* Organizor
+* Organizer
 * Initial API Development
+* Express server setup
