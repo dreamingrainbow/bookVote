@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './SearchResult.css';
 
 const SearchResult = props => {
@@ -7,24 +6,23 @@ const SearchResult = props => {
   let bookTitle = book.TITLE;
   let bookAuthor = book.AUTHOR;
   let bookISBN = book.ISBN;
-  let bookImage =
-    'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Clrs3.jpeg/220px-Clrs3.jpeg';
+  let bookImage ='https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Clrs3.jpeg/220px-Clrs3.jpeg';
   let upVote = book.VOTES.UP;
   let downVote = book.VOTES.DOWN;
 
   return (
     <div className="searchResultContainer">
       <div className="imageContainer">
-        <img src={bookImage} />
+        <img src={bookImage} alt=""/>
       </div>
       <div className="bookDetails">
         <div className="votes">
-          <a href="#" className="upVotes">
-            👍 <span className="hover">{upVote}</span>
-          </a>
-          <a href="#" className="downVotes">
-            👎 <span className="hover">{downVote}</span>
-          </a>
+          <button className="upVotes">
+            <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
+          </button>
+          <button className="downVotes">
+          <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
+          </button>
         </div>
         <span className="bookTitle">{bookTitle}</span>
         <br />
