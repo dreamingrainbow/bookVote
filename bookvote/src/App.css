@@ -50,3 +50,13 @@
   color: silver;
 }
 
+.HomePageDisplay {
+  display: flex;
+  flex-direction: column;
+  background-color: #c09f80;
+  width: 90vw;
+  height: 100vh;
+  border-radius: 2em;
+  margin-top: 1em;
+}
+
