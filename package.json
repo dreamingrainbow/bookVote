@@ -4,6 +4,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-react-views": "^0.10.4",
+    "mongodb": "^3.0.1",
     "node-uuid": "^1.4.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
