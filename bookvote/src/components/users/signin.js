@@ -39,7 +39,7 @@ class SignIn extends Component {
       <div>
         <form className="form-signup">
           <h2 className="form-signup-heading">Sign In</h2>
-          <label for="inputUsername">User name</label>
+          <label htmlFor="inputUsername">User name</label>
           <input
             type="username"
             onChange={this.handleInputusername}
@@ -49,7 +49,7 @@ class SignIn extends Component {
             required
           />
 
-          <label for="inputPassword">Password</label>
+          <label htmlFor="inputPassword">Password</label>
           <input
             type="password"
             onChange={this.handleInputpassword}

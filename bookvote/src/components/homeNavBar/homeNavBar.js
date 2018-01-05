@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter} from 'react-router-dom';
 import HomeHeader from './HomeHeader';
 import LowerButtonStrip from './LowerButtonStrip';
 

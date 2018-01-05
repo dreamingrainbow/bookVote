@@ -43,7 +43,7 @@ class SearchResult extends Component {
     let downVote = this.state.downVote;
 
     return (
-      <div className="searchResultContainer">
+      <div className="searchResultContainer" key={bookID} >
         <div className="imageContainer">
           <img src={bookImage} alt=""/>
         </div>
