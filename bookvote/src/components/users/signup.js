@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { axios } from 'axios';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import url from '../../config';
 
 class SignUp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      username: ' ',
-      password: ' '
+      user : props.user
     };
 
     this.handleInputusername = this.handleInputusername.bind(this);
@@ -25,12 +24,11 @@ class SignUp extends Component {
     e.preventDefault();
     // create user variable to save to database
     const newUser = {
-      username: this.state.username,
-      password: this.state.password
+      USERNAME: this.state.username,
+      PASSWORD: this.state.password
     };
-
     axios
-      .post(`${url}/User/Add`, newUser)
+      .post(`${url}/API/User`, newUser)
       .then(function(response) {
         console.log(response);
       })
@@ -42,7 +40,7 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <form className="form-signup">
+        <form className="form-signup" onSubmit={this.saveUser} >
           <h2 className="form-signup-heading">Sign Up to Register</h2>
           <label htmlFor="inputUsername">User name</label>
           <input
@@ -65,9 +63,8 @@ class SignUp extends Component {
           />
 
           <button
-            className="btn btn-lg btn-primary btn-block"
-            onClick={this.signUp}
-            type="button"
+            className="btn btn-lg btn-primary btn-block"            
+            type="submit"
           >
             Sign up
           </button>
