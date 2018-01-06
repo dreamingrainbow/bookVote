@@ -7,7 +7,7 @@ class HomeNavBar extends Component {
     return (
       <div className="HomeNavBarContainer">
         <HomeHeader />
-        <LowerButtonStrip />
+        <LowerButtonStrip user={this.props.user}/>
       </div>
     )
   }
