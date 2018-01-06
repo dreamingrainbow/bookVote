@@ -26,7 +26,7 @@
 
 **SEARCH**
 * Search Results  
-┗ ❌ Book Images
+┗ ☑️ Book Images
 
 **USER**
 * ❌ Comments
@@ -35,7 +35,8 @@
 **MISC**
 * ❌ Styling
 * ❌ Amazon Referral Links
-* ❌ Migrate to Redux
+* ❌ Migrate to Redux  
+┗ ☑️ Signup/Signin
 
 # API End Points
 
