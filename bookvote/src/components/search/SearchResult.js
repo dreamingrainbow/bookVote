@@ -8,53 +8,80 @@ class SearchResult extends Component {
     super(props);
     this.state = {
       upVote: this.props.results.VOTES.UP,
-      downVote: this.props.results.VOTES.DOWN
+      downVote: this.props.results.VOTES.DOWN,
+      cover: 'https://onestopfiction.com/-res/img/book-placeholder.jpg'
     };
-
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
   }
 
-  handleUpVote(event) {
-    axios.post(`${url}/API/Vote`, {
-      "BOOK_ID": this.props.results.BOOK_ID,
-      "VOTE": "UP"
-    })
-      .then((res) => this.setState({ upVote: res.data.VOTES.UP }))
-      .catch((err) => console.log(err));
+  async handleUpVote() {
+    try {
+      let res = await axios.post(`${url}/API/Vote`, { BOOK_ID: this.props.results.BOOK_ID, VOTE: 'UP' });
+      this.setState({ upVote: res.data.VOTES.UP });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  handleDownVote(event) {
-    axios.post(`${url}/API/Vote`, {
-      "BOOK_ID": this.props.results.BOOK_ID,
-      "VOTE": "DOWN"
-    })
-      .then((res) => this.setState({ downVote: res.data.VOTES.DOWN }))
-      .catch((err) => console.log(err));
+  async handleDownVote() {
+    try {
+      let res = await axios.post(`${url}/API/Vote`, { BOOK_ID: this.props.results.BOOK_ID, VOTE: 'DOWN' });
+      this.setState({ downVote: res.data.VOTES.DOWN });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.props.results.ISBN}`);
+      if (res.data.totalItems === 1)
+        this.setState({ cover: res.data.items[0].volumeInfo.imageLinks.thumbnail });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {
     const book = this.props.results;
-    let bookID = book.BOOK_ID;
-    let bookTitle = book.TITLE;
-    let bookAuthor = book.AUTHOR;
-    let bookISBN = book.ISBN;
-    let bookImage ='https://onestopfiction.com/-res/img/book-placeholder.jpg';
-    let upVote = this.state.upVote;
-    let downVote = this.state.downVote;
+    const bookID = book.BOOK_ID;
+    const bookTitle = book.TITLE;
+    const bookAuthor = book.AUTHOR;
+    const bookISBN = book.ISBN;
+    const upVote = this.state.upVote;
+    const downVote = this.state.downVote;
 
     return (
       <div className="searchResultContainer" key={bookID}>
         <div className="imageContainer">
-          <img src={bookImage} alt=""/>
+          <img src={this.state.cover} alt="" className="cover" />
         </div>
         <div className="bookDetails">
           <div className="votes">
-            <button onClick={this.handleUpVote} name="upVote" className="upVotes">
-              <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
+            <button
+              onClick={this.handleUpVote}
+              name="upVote"
+              className="upVotes"
+            >
+              <span role="img" aria-label="UpVote">
+                👍
+              </span>{' '}
+              <span className="hover" aria-labelledby="UpVote">
+                {upVote}
+              </span>
             </button>
-            <button onClick={this.handleDownVote} name="downVote" className="downVotes">
-            <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
+            <button
+              onClick={this.handleDownVote}
+              name="downVote"
+              className="downVotes"
+            >
+              <span role="img" aria-label="DownVote">
+                👎
+              </span>{' '}
+              <span className="hover" aria-labelledby="DownVote">
+                {downVote}
+              </span>
             </button>
           </div>
           <span className="bookTitle">{bookTitle}</span>
@@ -71,6 +98,6 @@ class SearchResult extends Component {
       </div>
     );
   }
-};
+}
 
 export default SearchResult;

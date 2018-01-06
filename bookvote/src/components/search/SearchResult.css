@@ -14,6 +14,12 @@
   height: 250px;
   width: 220px;
 }
+
+.cover {
+  width: 186px;
+  height: 250px;
+}
+
 .votes {
   position: relative;
   align-self: flex-end;
@@ -89,7 +95,7 @@
 }
 
 .bookTitle {
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
 .Search-header {

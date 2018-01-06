@@ -94,7 +94,7 @@ server.post('/API/User/:username', (req, res) => {
             } else {
                 _user = {}
                 _user.USERNAME = req.params.username;
-                _user.REPONSE = ["Success", "Valid Login"];
+                _user.RESPONSE = ["Success", "Valid Login"];
                 res.send(_user);
             }
         });

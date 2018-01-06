@@ -11,38 +11,33 @@ class Search extends Component {
       search: '',
       response: null
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const value =
-      event.target.type === 'text' ? event.target.value : event.target.value;
-    const name = event.target.name;
-
+  handleChange(e) {
+    const value = e.target.type === 'text' ? e.target.value : e.target.value;
+    const name = e.target.name;
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
-    if (event.which === 13) {
-      axios.get(`${url}/API/Search/${this.state.filter}/${this.state.search}`)
-        .then(res => this.setState({ response: res.data }))
-        .catch(err => console.log(err));
+  async handleSubmit(e) {
+    try {
+      if (e.which === 13) {
+        let res = await axios.get(`${url}/API/Search/${this.state.filter}/${this.state.search}`)
+        this.setState({ response: res.data });
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
-  createSearchResult(response) {
-    return (
-      <SearchResult
-        results={response}
-        key={response._id}
-      />
-    );
+  createSearchResult(res) {
+    return <SearchResult results={res} key={res._id} />;
   }
 
-  createSearchResults(response) {
-    return response.map(this.createSearchResult);
+  createSearchResults(res) {
+    return res.map(this.createSearchResult);
   }
 
   render() {
