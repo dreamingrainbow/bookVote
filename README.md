@@ -1,6 +1,6 @@
 ![book vote](https://i.imgur.com/sWNedkn.png)
 
-# What is our MVP?
+# Initial MVP
 
 ☑️ **HOMEPAGE**
 
@@ -22,10 +22,17 @@
 * ❌ Verify
 * ☑️ Login
 
-# Secondary (Optional)
+# Second Phase
+
+**HOMEPAGE**
+* ❌ Redo Logo
+* ❌ Redo NavBar
+* ❌ Add new cateories/subjects tabs
+* ❌ Add masonry grid layout
 
 **SEARCH**
-* Search Results  
+* ❌ Add search robust filters
+* ❌ Redo search results  
 ┗ ☑️ Book Images
 
 **USER**
@@ -33,10 +40,13 @@
 * ❌ Book Reviews
 
 **MISC**
-* ❌ Styling
 * ❌ Amazon Referral Links
 * ❌ Migrate to Redux  
 ┗ ☑️ Signup/Signin
+
+**BACKEND**
+* ❌ Refactor book object to include new categories/subjects
+* ❌ Refactor server.js
 
 # API End Points
 
@@ -124,11 +134,9 @@
 
 # The Team
 ### Sean Valdivia
-* Home Page Components
-* Front-End (React)
+* Initial Design of NavBar
 ### Anthony Tweed
-* Sign In / Sign Up
-* Front-End (React)
+* Initial Code for Sign In / Sign Up
 ### Frank Faustino
 * Wiki
 * Search
