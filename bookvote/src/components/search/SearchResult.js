@@ -3,6 +3,11 @@ import axios from 'axios';
 import url from '../../config';
 import './SearchResult.css';
 
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { authenticate } from '../../actions';
+
 class SearchResult extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +47,9 @@ class SearchResult extends Component {
       console.error(e);
     }
   }
-
+  componentDidMount(){
+    this.setState({user:this.props.user});
+  }
   render() {
     const book = this.props.results;
     const bookID = book.BOOK_ID;
@@ -58,32 +65,29 @@ class SearchResult extends Component {
           <img src={this.state.cover} alt="" className="cover" />
         </div>
         <div className="bookDetails">
-          <div className="votes">
-            <button
-              onClick={this.handleUpVote}
-              name="upVote"
-              className="upVotes"
-            >
-              <span role="img" aria-label="UpVote">
-                👍
-              </span>{' '}
-              <span className="hover" aria-labelledby="UpVote">
-                {upVote}
-              </span>
-            </button>
-            <button
-              onClick={this.handleDownVote}
-              name="downVote"
-              className="downVotes"
-            >
-              <span role="img" aria-label="DownVote">
-                👎
-              </span>{' '}
-              <span className="hover" aria-labelledby="DownVote">
-                {downVote}
-              </span>
-            </button>
-          </div>
+          {this.props.user.token !== null ?
+            <div className="votes">
+              
+              <button onClick={this.handleUpVote} name="upVote" className="upVotes">
+                <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
+              </button>
+              <button onClick={this.handleDownVote} name="downVote" className="downVotes">
+              <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
+              </button>
+            
+            </div>              
+              :
+            <div className="votes">
+              <button onClick={this.showSignUp} name="upVote" className="upVotes">
+                <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
+              </button>
+              <button onClick={this.showSignUp} name="downVote" className="downVotes">
+              <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
+              </button>
+            </div>
+            
+          }
+
           <span className="bookTitle">{bookTitle}</span>
           <br />
           <span className="bookAuthor">
@@ -100,4 +104,15 @@ class SearchResult extends Component {
   }
 }
 
-export default SearchResult;
+const mapStateToProps = (state, props) => {
+  return {
+    user : state.user,
+    filter : state.filter,
+    search : state.search,
+    response : state.response
+  };
+}
+export function mapDispatchToProps(dispatch) {
+  return bindActionCreators({authenticate}, dispatch);
+};
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SearchResult));
