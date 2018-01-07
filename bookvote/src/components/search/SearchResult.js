@@ -40,14 +40,15 @@ class SearchResult extends Component {
 
   async componentDidMount() {
     try {
+      this.setState({ user: this.props.user });
       let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.props.results.ISBN}`);
       if (res.data.totalItems === 1)
-        this.setState({ user:this.props.user, cover: res.data.items[0].volumeInfo.imageLinks.thumbnail });
+        this.setState({ cover: res.data.items[0].volumeInfo.imageLinks.thumbnail });
     } catch (e) {
       console.error(e);
     }
   }
-  
+
   render() {
     const book = this.props.results;
     const bookID = book.BOOK_ID;
@@ -65,15 +66,14 @@ class SearchResult extends Component {
         <div className="bookDetails">
           {this.props.user.token !== null ?
             <div className="votes">
-              
               <button onClick={this.handleUpVote} name="upVote" className="upVotes">
                 <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
               </button>
               <button onClick={this.handleDownVote} name="downVote" className="downVotes">
               <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
               </button>
-            
-            </div>              
+
+            </div>
               :
             <div className="votes">
               <button onClick={this.showSignUp} name="upVote" className="upVotes">
@@ -83,7 +83,6 @@ class SearchResult extends Component {
               <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
               </button>
             </div>
-            
           }
 
           <span className="bookTitle">{bookTitle}</span>
@@ -102,15 +101,12 @@ class SearchResult extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    user : state.user,
-    filter : state.filter,
-    search : state.search,
-    response : state.response
-  };
-}
-export function mapDispatchToProps(dispatch) {
-  return bindActionCreators({authenticate}, dispatch);
-};
+const mapStateToProps = (state, props) => ({
+  user: state.user,
+  filter: state.filter,
+  search: state.search,
+  response: state.response
+});
+
+export const mapDispatchToProps = dispatch => bindActionCreators({authenticate}, dispatch);
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SearchResult));

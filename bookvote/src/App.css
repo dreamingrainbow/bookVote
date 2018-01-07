@@ -55,7 +55,7 @@
   color: silver;
 }
 
-.PageDisplay {
+.pageDisplay {
   display: flex;
   justify-content: center;
   background-color: #c09f80;

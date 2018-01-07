@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import SearchResult from './SearchResult.js';
-import url from '../../config';
-import axios from 'axios';
-
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
+import Masonry from 'react-masonry-component';
+
+import SearchResult from './SearchResult.js';
+import url from '../../config';
 import { setFilter, setSearchQuery, setResponseData } from '../../actions';
+
+const masonryOptions = { transitionDuration: 0 };
 
 class Search extends Component {
   constructor() {
@@ -20,42 +23,40 @@ class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const value = event.target.type === 'text' ? event.target.value : event.target.value;
-    const name = event.target.name;
+  handleChange(e) {
+    const value = e.target.type === 'text' ? e.target.value : e.target.value;
+    const name = e.target.name;
     let result;
-    if(name === 'filter') {
-      result = this.props.setFilter(value);
-    } else {
-      result = this.props.setSearchQuery(value);
-    }
+    name === 'filter'
+      ? result = this.props.setFilter(value)
+      : result = this.props.setSearchQuery(value);
     this.setState({ [name]: result.payload });
   }
 
-  handleSubmit(event) {  
-    event.preventDefault();
-      axios.get(`${url}/API/Search/${this.props.filter}/${this.props.search}`)        
-        .then(res => {
-          this.props.setResponseData(res.data);
-          this.setState({ response: res.data })
-        })
-        .catch(err => console.log(err));
-    
+  async handleSubmit(e) {
+    try {
+      e.preventDefault();
+      let res = await axios.get(`${url}/API/Search/${this.props.filter}/${this.props.search}`)
+      this.props.setResponseData(res.data);
+      this.setState({ response: res.data })
+    } catch(e) {
+      console.error(e);
+    }
   }
 
-  createSearchResult(res) {
-    return <SearchResult results={res} key={res._id} />;
-  }
+  // createSearchResults(res) {
+  //   return res.map(e => <SearchResult results={e} key={e._id} />);
+  // }
 
-  createSearchResults(res) {
-    return res.map(this.createSearchResult);
-  }
+  createSearchResults = res => res.map((e, i) => (
+    <div style={{paddingLeft: '3px', paddingRight: '3px', border: '1px solid red', backgroundColor: 'white', height: 300, width: 165}}>{i}</div>
+  ))
 
   componentDidMount(){
     this.setState({
-      filter : this.props.filter,
-      search : this.props.search,
-      response : this.props.response
+      filter: this.props.filter,
+      search: this.props.search,
+      response: this.props.response
     })
   }
 
@@ -86,26 +87,29 @@ class Search extends Component {
             </form>
           </div>
         </header>
+        <Masonry
+          className={'grid'}
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          updateOnEachImageLoad={false}
+        >
           {this.state.response
             ? this.state.response.hasOwnProperty('RESPONSE')
             ? null
             : this.createSearchResults(this.state.response)
             : null}
+        </Masonry>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    filter : state.filter,
-    search : state.search,
-    response : state.response
-  };
-}
+const mapStateToProps = (state, props) => ({
+  filter: state.filter,
+  search: state.search,
+  response: state.response
+});
 
-export function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setFilter, setSearchQuery, setResponseData}, dispatch);
-};
-
+export const mapDispatchToProps = dispatch => bindActionCreators({setFilter, setSearchQuery, setResponseData}, dispatch);
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Search));
