@@ -72,7 +72,6 @@ class SearchResult extends Component {
         <div className="imageContainer">
           <img src={this.state.cover} alt="" className="cover" />
         </div>
-<<<<<<< HEAD
         <h3 className="bookTitle">{bookTitle}</h3>
         <div className="votes">
           <button onClick={this.handleUpVote} className="upVotes">
@@ -81,38 +80,6 @@ class SearchResult extends Component {
           <button onClick={this.handleDownVote} className="downVotes">
           <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
           </button>
-=======
-        <div className="bookDetails">
-          {this.props.user.token !== null ?
-            <div className="votes">
-              <button onClick={this.handleUpVote} name="upVote" className="upVotes">
-                <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
-              </button>
-              <button onClick={this.handleDownVote} name="downVote" className="downVotes">
-              <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
-              </button>
-            </div>
-              :
-            <div className="votes">
-              <button onClick={this.showSignUp} name="upVote" className="upVotes">
-                <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
-              </button>
-              <button onClick={this.showSignUp} name="downVote" className="downVotes">
-              <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
-              </button>
-            </div>
-          }
-          <span className="bookTitle">{bookTitle}</span>
-          <br />
-          <span className="bookAuthor">
-            <span style={{ fontWeight: 700 }}>Authors:</span> {bookAuthor}
-          </span>
-          <br />
-          <span className="bookISBN">
-            <span style={{ fontWeight: 700 }}>ISBN:</span> {bookISBN}
-          </span>
-          <br />
->>>>>>> a3300580fd1edb075c4fc56297b8dccbb0e18814
         </div>
       </div>
     );

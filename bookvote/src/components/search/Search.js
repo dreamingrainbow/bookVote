@@ -91,7 +91,6 @@ class Search extends Component {
             </form>
           </div>
         </header>
-<<<<<<< HEAD
         <Masonry
           className={'grid'}
           elementType={'div'}
@@ -105,13 +104,6 @@ class Search extends Component {
             : this.createSearchResults(this.state.response)
             : null}
         </Masonry>
-=======
-        {this.state.response
-          ? this.state.response.hasOwnProperty('RESPONSE')
-          ? null
-          : this.createSearchResults(this.state.response)
-          : null}
->>>>>>> a3300580fd1edb075c4fc56297b8dccbb0e18814
       </div>
     );
   }
