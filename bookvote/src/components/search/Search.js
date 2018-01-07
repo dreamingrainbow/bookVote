@@ -70,20 +70,11 @@ class Search extends Component {
           <CategorySelection />
           <SubcategorySelection />
         </header>
-<<<<<<< HEAD
-
           {this.state.response
             ? this.state.response.hasOwnProperty('RESPONSE')
             ? null
             : this.createSearchResults(this.state.response)
             : null}
-=======
-        {this.state.response
-          ? this.state.response.hasOwnProperty('RESPONSE')
-          ? null
-          : this.createSearchResults(this.state.response)
-          : null}
->>>>>>> 8454ac202f1611b2f034bf91321c199e8389f7d9
       </div>
     );
   }
