@@ -42,14 +42,12 @@ class SearchResult extends Component {
     try {
       let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.props.results.ISBN}`);
       if (res.data.totalItems === 1)
-        this.setState({ cover: res.data.items[0].volumeInfo.imageLinks.thumbnail });
+        this.setState({ user:this.props.user, cover: res.data.items[0].volumeInfo.imageLinks.thumbnail });
     } catch (e) {
       console.error(e);
     }
   }
-  componentDidMount(){
-    this.setState({user:this.props.user});
-  }
+  
   render() {
     const book = this.props.results;
     const bookID = book.BOOK_ID;
