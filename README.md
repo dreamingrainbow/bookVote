@@ -1,4 +1,4 @@
-![book vote](https://i.imgur.com/sWNedkn.png)
+![book vote](https://i.imgur.com/in0MPh3.png)
 
 # Initial MVP
 
