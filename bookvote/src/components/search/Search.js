@@ -8,7 +8,7 @@ import axios from 'axios';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFilter, setSearchQuery, setResponseData } from '../../actions';
+import { setCategory, setSubcategory, setFilter, setSearchQuery, setResponseData } from '../../actions';
 import { Categories } from './Categories';
 
 class Search extends Component {
@@ -57,6 +57,8 @@ class Search extends Component {
 
   componentDidMount(){
     this.setState({
+      category:this.props.category,
+      subcategory: this.props.subcategory,
       filter: this.props.filter,
       search: this.props.search,
       response: this.props.response
@@ -81,10 +83,12 @@ class Search extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  category:state.category,
+  subcategory: state.subcategory,
   filter: state.filter,
   search: state.search,
   response: state.response
 });
 
-export const mapDispatchToProps = dispatch => bindActionCreators({setFilter, setSearchQuery, setResponseData}, dispatch);
+export const mapDispatchToProps = dispatch => bindActionCreators({setCategory, setSubcategory, setFilter, setSearchQuery, setResponseData}, dispatch);
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Search));

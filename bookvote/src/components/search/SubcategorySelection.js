@@ -17,8 +17,8 @@ class SubcategorySelection extends Component {
     }
     handleClick(e) {
         //e.preventDefault();
-        this.props.setCategory(e.target.innerText)
-        this.setState({category:e.target.innerText});
+        this.props.setSubcategory(e.target.innerText)
+        this.setState({subcategory:e.target.innerText});
     }
 
     render(){
@@ -27,7 +27,6 @@ class SubcategorySelection extends Component {
         }
         return(
             <nav>
-
             {   
                 this.category ? this.category.subcategories.map((subcategory) => <NavLink to={this.props.location.pathname+subcategory.path} className="button" activeClassName="button--active" key={subcategory.name}>{subcategory.name}</NavLink>) : null
             }   
