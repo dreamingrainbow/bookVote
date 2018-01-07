@@ -27,9 +27,14 @@ class Search extends Component {
     const value = e.target.type === 'text' ? e.target.value : e.target.value;
     const name = e.target.name;
     let result;
-    name === 'filter'
-      ? result = this.props.setFilter(value)
-      : result = this.props.setSearchQuery(value);
+    switch(name) {
+      case 'filter':
+        result = this.props.setFilter(value);
+        break;
+      case 'search':
+        result = this.props.setSearchQuery(value);
+        break;
+    }
     this.setState({ [name]: result.payload });
   }
 
@@ -86,6 +91,7 @@ class Search extends Component {
             </form>
           </div>
         </header>
+<<<<<<< HEAD
         <Masonry
           className={'grid'}
           elementType={'div'}
@@ -99,6 +105,13 @@ class Search extends Component {
             : this.createSearchResults(this.state.response)
             : null}
         </Masonry>
+=======
+        {this.state.response
+          ? this.state.response.hasOwnProperty('RESPONSE')
+          ? null
+          : this.createSearchResults(this.state.response)
+          : null}
+>>>>>>> a3300580fd1edb075c4fc56297b8dccbb0e18814
       </div>
     );
   }
