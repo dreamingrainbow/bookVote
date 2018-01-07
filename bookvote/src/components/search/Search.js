@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
+import CategorySelection from './CategorySelection.js';
+import SubcategorySelection from './SubcategorySelection.js';
 import SearchResult from './SearchResult.js';
 import url from '../../config';
 import axios from 'axios';
 
-import { withRouter } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFilter, setSearchQuery, setResponseData } from '../../actions';
+import { Categories } from './Categories';
 
 class Search extends Component {
   constructor() {
     super();
     this.state = {
+      category:'ALL',
+      subcategory: null,
       filter: 'SUBJECT',
       search: 'math',
       response: null
@@ -26,7 +31,7 @@ class Search extends Component {
     let result;
     if(name === 'filter') {
       result = this.props.setFilter(value);
-    } else {
+    } else if(name === 'search') {
       result = this.props.setSearchQuery(value);
     }
     this.setState({ [name]: result.payload });
@@ -63,29 +68,10 @@ class Search extends Component {
     return (
       <div className="Search">
         <header className="Search-header">
-          <h1 className="Search-title" style={{display: 'inline'}}>Search books</h1>
-          <div className="form" style={{ marginBottom: '10px',display: 'inline' }}>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                name="search"
-                type="text"
-                value={this.state.search}
-                onChange={this.handleChange}
-              />
-              <select
-                name="filter"
-                value={this.state.filter}
-                onChange={this.handleChange}
-              >
-                <option value="SUBJECT">Subject</option>
-                <option value="TITLE">Title</option>
-                <option value="AUTHOR">Author</option>
-                <option value="ISBN">ISBN</option>
-              </select>
-              <button type="submit">Search</button>
-            </form>
-          </div>
+          <CategorySelection />
+          <SubcategorySelection />
         </header>
+
           {this.state.response
             ? this.state.response.hasOwnProperty('RESPONSE')
             ? null

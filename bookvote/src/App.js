@@ -10,6 +10,8 @@ import AddBook from './components/books/AddBook';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { authenticate } from './actions';
+import { Categories } from './components/search/Categories';
+import SearchResult from './components/search/SearchResult';
 class App extends Component {
   constructor(props) {    
     super(props)
@@ -27,11 +29,17 @@ class App extends Component {
             <Route path="/" component={PageDisplay} exact />
             <Route path="/SignUp" component={SignUp} exact />
             <Route path="/SignIn" component={SignIn} exact />
+            {
+              Categories.map((category) => <Route path={category.path} component={PageDisplay} key={category.path} exact/>)
+            }
           </Switch>
            :
           <Switch>
-            <Route path="/" component={PageDisplay} exact />
+            <Route path="/" component={PageDisplay} exact/>
             <Route path="/Add-A-Book" component={AddBook} exact />
+            {
+              Categories.map((category) => <Route path={category.path} component={PageDisplay} key={category.path} exact/>)
+            }
           </Switch>
         }        
       </div>
