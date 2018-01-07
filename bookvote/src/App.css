@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #c09f80;
+  background-color: #ffffff;
   width: 90vw;
   border-radius: 2em;
 }
@@ -16,7 +16,7 @@
 .HomeHeader {
   display: flex;
   justify-content: center;
-  color: #76323f;
+  color: #ffffff;
   width: 90vw;
 }
 
@@ -24,7 +24,7 @@
   font-size: 4em;
   font-weight: 700;
   color:#565656;
-  text-shadow: .02em .02em sienna; 
+  text-shadow: .02em .02em #ffffff;
 }
 
 .LowerButtonStrip {
@@ -39,7 +39,7 @@
   margin: .25em;
   display: flex;
   justify-content: center;
-  background-color: #565656;
+  background-color: #eeeeee;
   width: 10vw;
   border: 1px solid silver;
   border-radius: 2em;
@@ -58,9 +58,9 @@
 .pageDisplay {
   display: flex;
   justify-content: center;
-  background-color: #c09f80;
+  background-color: #ffffff;
   width: 90vw;
-  border-radius: 2em;
+  /* border-radius: 2em; */
   margin-top: 1em;
 }
 
@@ -68,16 +68,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #c09f80;
-  /* background-image: url('./images/heapsOfBooks.jpg'); */
+  background-color: #ffffff;
   width: 75vw;
-  border:1px solid silver;
-  border-radius: 2em;
+  /* border:1px solid silver; */
+  /* border-radius: 2em; */
   margin: auto;
 }
 
 input,select,button {
-  background-color: #565656;
+  background-color: #eeeeee;
   border: 1px solid silver;
   border-radius: 2em;
   font-size: 2em;
@@ -94,5 +93,5 @@ label {
   font-size: 2em;
   font-weight: 700;
   color:#565656;
-  text-shadow: .02em .02em sienna; 
+  text-shadow: .02em .02em ffffff;
 }

@@ -44,13 +44,13 @@ class Search extends Component {
     }
   }
 
-  // createSearchResults(res) {
-  //   return res.map(e => <SearchResult results={e} key={e._id} />);
-  // }
+  createSearchResults(res) {
+    return res.map(e => <SearchResult results={e} key={e._id} />);
+  }
 
-  createSearchResults = res => res.map((e, i) => (
-    <div style={{paddingLeft: '3px', paddingRight: '3px', border: '1px solid red', backgroundColor: 'white', height: 300, width: 165}}>{i}</div>
-  ))
+  // createSearchResults = res => res.map((e, i) => (
+  //   <div style={{paddingLeft: '3px', paddingRight: '3px', border: '1px solid red', backgroundColor: 'white', height: 300, width: 165}}>{i}</div>
+  // ))
 
   componentDidMount(){
     this.setState({
@@ -64,7 +64,6 @@ class Search extends Component {
     return (
       <div className="Search">
         <header className="Search-header">
-          <h1 className="Search-title" style={{display: 'inline'}}>Search books</h1>
           <div className="form" style={{ marginBottom: '10px',display: 'inline' }}>
             <form onSubmit={this.handleSubmit}>
               <input
