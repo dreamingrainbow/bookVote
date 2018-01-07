@@ -44,7 +44,7 @@ body {
   justify-content: center;
   background-color: #565656;
   width: 10vw;
-  border: 1px solid darkblue;
+  border: 1px solid #595991;
   border-radius: 2em; }
 
 .buttonText {
@@ -54,7 +54,7 @@ body {
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
-  color: darkblue; }
+  color: #595991; }
 
 .PageDisplay {
   display: flex;
@@ -71,13 +71,13 @@ body {
   background-color: #c09f80;
   /* background-image: url('./images/heapsOfBooks.jpg'); */
   width: 75vw;
-  border: 1px solid darkblue;
+  border: 1px solid #595991;
   border-radius: 2em;
   margin: auto; }
 
 input, select, button {
   background-color: #565656;
-  border: 1px solid darkblue;
+  border: 1px solid #595991;
   border-radius: 2em;
   font-size: 2em;
   margin-left: .25em;
