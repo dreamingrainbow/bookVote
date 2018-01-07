@@ -24,38 +24,32 @@ class Search extends Component {
     const value = event.target.type === 'text' ? event.target.value : event.target.value;
     const name = event.target.name;
     let result;
-    if(name === 'filter') {
-      result = this.props.setFilter(value);
-    } else {
-      result = this.props.setSearchQuery(value);
-    }
+    name === 'filter'
+      ? result = this.props.setFilter(value)
+      : result = this.props.setSearchQuery(value);
     this.setState({ [name]: result.payload });
   }
 
-  handleSubmit(event) {  
-    event.preventDefault();
-      axios.get(`${url}/API/Search/${this.props.filter}/${this.props.search}`)        
-        .then(res => {
-          this.props.setResponseData(res.data);
-          this.setState({ response: res.data })
-        })
-        .catch(err => console.log(err));
-    
-  }
-
-  createSearchResult(res) {
-    return <SearchResult results={res} key={res._id} />;
+  async handleSubmit(e) {
+    try {
+      e.preventDefault();
+      let res = await axios.get(`${url}/API/Search/${this.props.filter}/${this.props.search}`)
+      this.props.setResponseData(res.data);
+      this.setState({ response: res.data })
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   createSearchResults(res) {
-    return res.map(this.createSearchResult);
+    return res.map(e => <SearchResult results={e} key={e._id} />);
   }
 
   componentDidMount(){
     this.setState({
-      filter : this.props.filter,
-      search : this.props.search,
-      response : this.props.response
+      filter: this.props.filter,
+      search: this.props.search,
+      response: this.props.response
     })
   }
 
@@ -86,26 +80,21 @@ class Search extends Component {
             </form>
           </div>
         </header>
-          {this.state.response
-            ? this.state.response.hasOwnProperty('RESPONSE')
-            ? null
-            : this.createSearchResults(this.state.response)
-            : null}
+        {this.state.response
+          ? this.state.response.hasOwnProperty('RESPONSE')
+          ? null
+          : this.createSearchResults(this.state.response)
+          : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    filter : state.filter,
-    search : state.search,
-    response : state.response
-  };
-}
+const mapStateToProps = (state, props) => ({
+  filter: state.filter,
+  search: state.search,
+  response: state.response
+});
 
-export function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setFilter, setSearchQuery, setResponseData}, dispatch);
-};
-
+export const mapDispatchToProps = dispatch => bindActionCreators({setFilter, setSearchQuery, setResponseData}, dispatch);
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Search));
