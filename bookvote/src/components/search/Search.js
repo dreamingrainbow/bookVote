@@ -24,9 +24,14 @@ class Search extends Component {
     const value = event.target.type === 'text' ? event.target.value : event.target.value;
     const name = event.target.name;
     let result;
-    name === 'filter'
-      ? result = this.props.setFilter(value)
-      : result = this.props.setSearchQuery(value);
+    switch(name) {
+      case 'filter':
+        result = this.props.setFilter(value);
+        break;
+      case 'search':
+        result = this.props.setSearchQuery(value);
+        break;
+    }
     this.setState({ [name]: result.payload });
   }
 
