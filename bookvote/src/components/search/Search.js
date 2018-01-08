@@ -5,11 +5,10 @@ import SearchResult from './SearchResult.js';
 import url from '../../config';
 import axios from 'axios';
 
-import { withRouter, Switch, Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setCategory, setSubcategory, setFilter, setSearchQuery, setResponseData } from '../../actions';
-import { Categories } from './Categories';
+import { setFilter, setSearchQuery, setResponseData } from '../../actions';
 
 class Search extends Component {
   constructor() {
@@ -30,12 +29,14 @@ class Search extends Component {
     const name = event.target.name;
     let result;
     switch(name) {
-      case 'filter':
-        result = this.props.setFilter(value);
-        break;
       case 'search':
         result = this.props.setSearchQuery(value);
         break;
+        case 'filter':
+        default:
+          result = this.props.setFilter(value);
+        break;
+      
     }
     this.setState({ [name]: result.payload });
   }
@@ -69,9 +70,31 @@ class Search extends Component {
     return (
       <div className="Search">
         <header className="Search-header">
+          {this.props.category}
+          {this.props.subcategory ? ' >> ' : null}
+          {this.props.subcategory ? this.props.subcategory : null}
+        </header>
           <CategorySelection />
           <SubcategorySelection />
-        </header>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            name="search"
+            type="text"
+            value={this.state.search}
+            onChange={this.handleChange}
+          />
+          <select
+            name="filter"
+            value={this.state.filter}
+            onChange={this.handleChange}
+          >
+            <option value="SUBJECT">Subject</option>
+            <option value="TITLE">Title</option>
+            <option value="AUTHOR">Author</option>
+            <option value="ISBN">ISBN</option>
+          </select>
+          <button type="submit">Search</button>
+        </form>
           {this.state.response
             ? this.state.response.hasOwnProperty('RESPONSE')
             ? null
@@ -90,5 +113,5 @@ const mapStateToProps = (state, props) => ({
   response: state.response
 });
 
-export const mapDispatchToProps = dispatch => bindActionCreators({setCategory, setSubcategory, setFilter, setSearchQuery, setResponseData}, dispatch);
+export const mapDispatchToProps = dispatch => bindActionCreators({ setFilter, setSearchQuery, setResponseData}, dispatch);
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Search));

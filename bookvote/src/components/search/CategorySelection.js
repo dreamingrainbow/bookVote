@@ -9,16 +9,18 @@ class CategorySelection extends Component {
         super(props)        
         this.handleClick = this.handleClick.bind(this);
     }
+    
     componentDidMount(){
         this.setState({            
-            category:this.props.category,
-            subcategory: this.props.subcategory
+            category:this.props.category
         })
     }
+
     handleClick(e) {
         //e.preventDefault();
-        this.props.setCategory(e.target.innerText)
-        this.setState({category:e.target.innerText});
+        this.props.setCategory(e.target.innerText);
+        this.props.setSubcategory();
+        this.setState({category:e.target.innerText, subcategory:null});
     }
 
     render(){
@@ -35,7 +37,7 @@ class CategorySelection extends Component {
 const mapStateToProps = (state, props) => {
     return {
         user : state.user, 
-        category:state.category,
+        category: state.category,
         subcategory: state.subcategory
     };
   }

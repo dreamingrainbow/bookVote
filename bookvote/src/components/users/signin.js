@@ -29,10 +29,9 @@ class SignIn extends Component {
     axios.post(`${url}/API/User/${this.state.username}`, {PASSWORD:this.state.password})
       .then((response) => {
         if(response.data.RESPONSE[0] !== 'Success') {
-          console.log(response);
           this.setState({user:{username:null,token:null}, error:response.data.RESPONSE[1]});
         } else {
-          this.props.authenticate({username:response.data.USERNAME, token:response.data.RESPONSE[1]})
+          this.props.authenticate({username:response.data.USERNAME, token:response.data.RESPONSE[1]});
           this.props.history.push('/', this.state)
         }
       })

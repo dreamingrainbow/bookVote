@@ -9,8 +9,8 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId; 
 let db;
 
-const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
-
+// const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
+const URL = 'mongodb://localhost';
 MongoClient.connect(URL, (err, database) => {
     if (err) return console.log(err)
     db = database.db('heroku_3d3d8n74');

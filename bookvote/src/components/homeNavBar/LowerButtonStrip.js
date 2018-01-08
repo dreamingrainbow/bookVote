@@ -8,10 +8,11 @@ class LowerButtonStrip extends Component {
   constructor(){
     super()
     this.signOut = this.signOut.bind(this);
-    this.clearCategories = this.clearCategories.bind(this);
   }
   componentDidMount(){
-    this.setState({user:this.props.user});
+    this.setState({user: this.props.user,
+      category: this.props.category,
+      subcategory: this.props.subcategory,});
   }
   signOut(e){
     e.preventDefault();
@@ -19,19 +20,11 @@ class LowerButtonStrip extends Component {
     this.setState({user:{username:null,token:null}});
     this.props.history.push('/');
   }
-  clearCategories(e) {
-    this.props.setCategory('All');
-    this.props.setSubcategory(null);
-    this.setState({
-      category:'ALL',
-      subcategory: null,
-    })
-  }
   render() {
     return (
       this.props.user.token === null ? 
       <div className = "LowerButtonStrip">
-        <NavLink to="/" className="button" activeClassName="button--active" onClick={this.clearCategories}><p className="buttonText">Home</p></NavLink>
+        <NavLink to="/" className="button" activeClassName="button--active"><p className="buttonText">Home</p></NavLink>
         <NavLink to="/SignUp" className="button" activeClassName="button--active"><p className="buttonText">SignUp</p></NavLink>
         <NavLink to="/SignIn" className="button" activeClassName="button--active"><p className="buttonText">SignIn</p></NavLink>
       </div>

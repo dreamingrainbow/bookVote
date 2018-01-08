@@ -65,7 +65,7 @@ const rootReducer = combineReducers({
     search:searchReducer,
     response: responseReducer,
     category: categoryReducer,
-    subcategory: subcategoryReducer
+    subcategory: subcategoryReducer,
     });
 
 export default rootReducer;
