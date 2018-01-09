@@ -1,12 +1,20 @@
 const {isNullOrUndefined} = require('util');
+
 const express = require('express');
+
 const bodyParser = require('body-parser');
+
 const cors = require('cors');
-const uuid = require('node-uuid');
+
+const uuid = require('uuid');
+
 const { createEngine } = require('express-react-views');
+
 const server = express();
+
 const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId; 
+const ObjectId = require('mongodb').ObjectId;
+
 let db;
 
 // const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
@@ -67,11 +75,15 @@ server.post('/API/Search', (req, res) => {
         q.AUTHOR = req.body.AUTHOR;
 
     if(req.body.TITLE)    
-        q.TITLE = req.body.TITLE;
+        q.TITLE = { $regex : req.body.TITLE, $options: 'i' };
     
+    if(req.body.ISBN)    
+        q.ISBN = req.body.ISBN;
+        
+    console.log(q);
     db.collection('books').find(q).sort({ "VOTES.UP" : -1 }).toArray((err, _book) => {
         if(_book.length === 0) {
-            _book = Object.create(book);
+            _book = Object.create(_book);
             _book.RESPONSE = ['Error','No Books found fitting your search!'];
         }
         res.send(
