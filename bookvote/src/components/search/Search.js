@@ -17,7 +17,7 @@ class Search extends Component {
       category:'ALL',
       subcategory: null,
       filter: 'SUBJECT',
-      search: 'math',
+      subject: 'math',
       response: null
     };
     this.handleChange = this.handleChange.bind(this);
@@ -29,27 +29,49 @@ class Search extends Component {
     const name = event.target.name;
     let result;
     switch(name) {
-      case 'search':
+      case 'subject':
         result = this.props.setSearchQuery(value);
         break;
         case 'filter':
         default:
           result = this.props.setFilter(value);
         break;
-      
     }
     this.setState({ [name]: result.payload });
   }
 
-  async handleSubmit(e) {
-    try {
+  handleSubmit(e) {
       e.preventDefault();
-      let res = await axios.get(`${url}/API/Search/${this.props.filter}/${this.props.search}`)
-      this.props.setResponseData(res.data);
-      this.setState({ response: res.data })
-    } catch(e) {
-      console.error(e);
-    }
+      let o = {}
+      switch(this.props.filter) {
+        case 'ISBN':
+          o.ISBN = this.props.search;
+          break;
+        case 'TITLE':
+          o.TITLE = this.props.search;
+          break;
+        case 'AUTHOR':
+          o.AUTHOR = this.props.search;
+          break;
+        case 'SUBJECT':
+        default:
+          o.QUERY = this.props.search
+      }
+      
+      if(this.state.category !== 'All')
+        o.CATEGORY = this.props.category;
+
+      if(this.state.subcategory)
+        o.SUBCATEGORY = this.props.subcategory;
+
+      axios.post(`${url}/API/Search`, o)
+      .then((res) => {
+        this.props.setResponseData(res.data);
+        this.setState({ response: res.data });
+      })
+      .catch(e => {
+        console.error(e);
+      })
   }
 
   createSearchResults(res) {
@@ -61,7 +83,7 @@ class Search extends Component {
       category:this.props.category,
       subcategory: this.props.subcategory,
       filter: this.props.filter,
-      search: this.props.search,
+      subject: this.props.subject,
       response: this.props.response
     })
   }
@@ -78,7 +100,7 @@ class Search extends Component {
           <SubcategorySelection />
         <form onSubmit={this.handleSubmit}>
           <input
-            name="search"
+            name="subject"
             type="text"
             value={this.state.search}
             onChange={this.handleChange}
