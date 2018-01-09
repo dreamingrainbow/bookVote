@@ -10,15 +10,17 @@ const uuid = require('uuid');
 
 const { createEngine } = require('express-react-views');
 
-const server = express();
-
 const MongoClient = require('mongodb').MongoClient;
+
 const ObjectId = require('mongodb').ObjectId;
+
+const server = express();
 
 let db;
 
 // const URL = 'mongodb://heroku_3d3d8n74:b3k83c698fvjp9o1iugi38ei2t@ds237967.mlab.com:37967/heroku_3d3d8n74';
 const URL = 'mongodb://localhost:27017/heroku_3d3d8n74';
+
 MongoClient.connect(URL, (err, database) => {
     if (err) return console.log(err)
     db = database.db('heroku_3d3d8n74');
@@ -29,6 +31,7 @@ MongoClient.connect(URL, (err, database) => {
 });    
 
 server.use(bodyParser.json());
+
 server.use(cors());
 
 const sendUserError = (msg, res) => {
@@ -69,10 +72,10 @@ server.post('/API/Search', (req, res) => {
         q.SUBCATEGORIES = req.body.SUBCATEGORY;
     
     if(req.body.SUBJECT)
-        q.SUBJECT = req.body.SUBJECT;
+        q.SUBJECT = { $regex : req.body.SUBJECT, $options: 'i' };
     
     if(req.body.AUTHOR)
-        q.AUTHOR = req.body.AUTHOR;
+        q.AUTHOR = { $regex : req.body.AUTHOR, $options: 'i' };
 
     if(req.body.TITLE)    
         q.TITLE = { $regex : req.body.TITLE, $options: 'i' };
