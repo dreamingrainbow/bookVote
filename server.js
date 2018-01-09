@@ -32,15 +32,9 @@ const sendUserError = (msg, res) => {
 const book = { 
     BOOK_ID:null,
     ISBN:null,
-    CATEGORIES: {
-        category: []
-        },
-    SUBCATEGORIES: {
-        subcategory: []
-        },
-    SUBJECT:{
-        tags:[]
-    },
+    CATEGORIES: [],
+    SUBCATEGORIES: [],
+    SUBJECT:[],
     AUTHOR:null,
     TITLE:null,
     VOTES:{UP:0,DOWN:0}
@@ -86,12 +80,6 @@ server.post('/API/Search', (req, res) => {
     });
 });
 
-server.get('/API/Books', (req, res) => {
-    db.collection('books').find().toArray(function (err, results) {
-        res.send(results);
-    })
-});
-
 server.post('/API/User/:username', (req, res) => {
     if(req.params.username !== undefined) {
         db.collection('users').find({ $and : [{ USERNAME : req.params.username}, {PASSWORD : req.body.PASSWORD }]}).toArray((err, _user) => {
@@ -129,6 +117,16 @@ server.post('/API/User', (req, res) => {
         sendUserError('Error: Parameter Missing. Username Required. POST /API/User',res);
     }
 });
+
+
+/* List all books */
+server.get('/API/Books', (req, res) => {
+    db.collection('books').find().toArray(function (err, results) {
+        res.send(results);
+    })
+});
+
+
 /* Load a Book by API Book Id */
 server.get('/API/Book/:id', (req, res) => {
     if (req.params.id !== undefined) {
@@ -151,6 +149,29 @@ server.get('/API/Book/:id', (req, res) => {
     }    
 });
 
+/* get book by Book Id. */
+server.get('/API/Book/Id/:id', (req, res) => {
+    if (req.params.id !== undefined) {
+
+        db.collection('books').find({BOOK_ID : req.params.id}).toArray((err, _book) => {
+            if(_book.length !== 0) {
+                _book[0].RESPONSE = ['Success','Book found!'];
+                _book = _book[0];
+            } else {
+                _book = Object.create(book);
+                _book.RESPONSE = ['Error','Book not found!'];
+            }
+            res.send(
+                _book
+            );
+        });
+
+    } else {
+        sendUserError('Error: Parameter Missing. Book Id required. GET /API/Book/:id',res);
+    }    
+});
+
+
 /* Add a new Book to the API */
 server.post('/API/Book', (req, res) => {    
     let _book = Object.create(book);
@@ -172,7 +193,6 @@ server.post('/API/Book', (req, res) => {
     
     if(req.body.SUBJECT !== undefined) {
         _book.SUBJECT = req.body.SUBJECT;
-        console.log(_book.SUBJECT)
     } else {
         err.push({status:'Error', message:'Parameter Missing. Subject required. POST /API/Book'});
     }
@@ -210,29 +230,46 @@ server.post('/API/Book', (req, res) => {
 
 });
 
-/* Add a new book to the system */
+/* Update a book */
 server.put('/API/Book/:id', (req, res) => {
     if (req.params.id !== undefined) {
+        let _book = Object.create(book);
+        Object.assign(_book, book);
         const myquery = { _id: ObjectId(req.params.id) };
-        let newvalues = {};
+        const err = [];
+        if(req.body.ISBN !== undefined) {
+            _book.ISBN = req.body.ISBN;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. ISBN required. POST /API/Book'});
+        }
+        
+        if(req.body.AUTHOR !== undefined) {
+            _book.AUTHOR = req.body.AUTHOR;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. Author required. POST /API/Book'});
+        }
+        
+        if(req.body.SUBJECT !== undefined) {
+            _book.SUBJECT = req.body.SUBJECT;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. Subject required. POST /API/Book'});
+        }
 
-        if (req.body.ISBN !== undefined) {
-            newvalues.ISBN = req.body.ISBN;
-        }        
-        if (req.body.AUTHOR !== undefined) {
-            newvalues.AUTHOR = req.body.AUTHOR;
+        if(req.body.CATEGORY !== undefined) {
+            _book.CATEGORIES = req.body.CATEGORY;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. Categories required. POST /API/Book'});
         }
-        if (req.body.TITLE !== undefined) {
-            newvalues.TITLE = req.body.TITLE;
+
+        if(req.body.SUBCATEGORY !== undefined) {
+            _book.SUBCATEGORIES = req.body.SUBCATEGORY;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. Subcategories required. POST /API/Book'});
         }
-        if (req.body.CATEGORY !== undefined) {
-            newvalues.CATEGORIES = {tags: req.body.CATEGORY};
-        }
-        if (req.body.SUBCATEGORY !== undefined) {
-            newvalues.SUBCATEGORIES = {tags: req.body.SUBCATEGORY};
-        }
-        if (req.body.SUBJECT !== undefined) {
-            newvalues.SUBJECT = {tags: req.body.SUBJECT};
+        if(req.body.TITLE !== undefined) {
+            _book.TITLE = req.body.TITLE;
+        } else {
+            err.push({status:'Error', message:'Parameter Missing. Title required. POST /API/Book'});
         }
         // dont do redudant call
         db.collection('books').findOneAndUpdate(
@@ -243,7 +280,7 @@ server.put('/API/Book/:id', (req, res) => {
                 if (err) console.log(err);
                 // todo, fix this!
                 db.collection('books').find(myquery).toArray((err, result) => {
-                    result.RESPONSE = ['Success', 'You updated a book!'];
+                    result.RESPONSE = ['Success', 'Book updated!'];
                     res.send(result);
                 })
             }

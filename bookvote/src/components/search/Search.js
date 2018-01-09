@@ -22,8 +22,19 @@ class Search extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
-
+  componentWillMount(){
+    if(this.state && this.state.response === null)
+    axios.post(`${url}/API/Search`, {})
+      .then((res) => {
+        this.props.setResponseData(res.data);
+        this.setState({response : res.data});
+      })
+      .catch(e => {
+        console.error(e);
+      })
+  }
   handleChange(event) {
     const value = event.target.type === 'text' ? event.target.value : event.target.value;
     const name = event.target.name;
