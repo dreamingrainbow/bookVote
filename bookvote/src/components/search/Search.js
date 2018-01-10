@@ -19,7 +19,7 @@ class Search extends Component {
       category:'ALL',
       subcategory: null,
       filter: 'SUBJECT',
-      subject: 'math',
+      search: 'math',
       response: null
     };
     this.handleChange = this.handleChange.bind(this);
@@ -43,7 +43,7 @@ class Search extends Component {
     const name = e.target.name;
     let result;
     switch(name) {
-      case 'subject':
+      case 'search':
         result = this.props.setSearchQuery(value);
         break;
         case 'filter':
@@ -101,7 +101,7 @@ class Search extends Component {
       category:this.props.category,
       subcategory: this.props.subcategory,
       filter: this.props.filter,
-      subject: this.props.subject,
+      search: this.props.search,
       response: this.props.response
     })
   }
