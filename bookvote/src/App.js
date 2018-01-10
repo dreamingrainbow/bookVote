@@ -1,16 +1,23 @@
+// Packages
 import React, { Component } from 'react';
-import './App.css';
-import './index.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter, Switch, Route } from 'react-router-dom';
+
+// Components
+import PageDisplay from './components/homepageDisplay/homepageDisplay';
 import HomeNavBar from './components/homeNavBar/homeNavBar';
-import { withRouter, Switch, Route } from 'react-router-dom'; 
 import SignUp from './components/users/signup';
 import SignIn from './components/users/signin';
-import PageDisplay from './components/homepageDisplay/homepageDisplay';
 import AddBook from './components/books/AddBook';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { authenticate, setCategory, setSubcategory } from './actions';
 import { Categories } from './components/search/Categories';
+// CSS
+import './App.css';
+import './index.css';
+
 class App extends Component {
   componentDidMount(){
     this.pathSplit = this.props.history.location.pathname.split('/')
@@ -40,6 +47,7 @@ class App extends Component {
     }
     this.setState({user:this.props.user,category:this.category,subcategory:this.subcategory});
   }
+
   render() {
     if(this.props.category) {
       this.category = (Categories.filter(category => this.props.category === 'All' || this.props.category === category.name)).pop();
@@ -51,11 +59,11 @@ class App extends Component {
     return (
       <div className="App">
         <HomeNavBar />
-        { this.props.user.token === null ?
+        {this.props.user.token === null ?
           <Switch>
-            <Route path="/" component={PageDisplay} exact />
-            <Route path="/SignUp" component={SignUp} exact />
-            <Route path="/SignIn" component={SignIn} exact />
+            <Route exact path="/" component={PageDisplay} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/SignIn" component={SignIn} />
           </Switch>
            :
           <Switch>

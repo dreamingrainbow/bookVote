@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import axios from 'axios';
+import Masonry from 'react-masonry-component';
 import CategorySelection from './CategorySelection.js';
 import SubcategorySelection from './SubcategorySelection.js';
 import SearchResult from './SearchResult.js';
 import url from '../../config';
-import axios from 'axios';
-
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { setFilter, setSearchQuery, setResponseData } from '../../actions';
+
+const masonryOptions = { transitionDuration: 0 };
 
 class Search extends Component {
   constructor() {
@@ -35,9 +37,10 @@ class Search extends Component {
         console.error(e);
       })
   }
-  handleChange(event) {
-    const value = event.target.type === 'text' ? event.target.value : event.target.value;
-    const name = event.target.name;
+
+  handleChange(e) {
+    const value = e.target.type === 'text' ? e.target.value : e.target.value;
+    const name = e.target.name;
     let result;
     switch(name) {
       case 'subject':
@@ -89,6 +92,10 @@ class Search extends Component {
     return res.map(e => <SearchResult results={e} key={e._id} />);
   }
 
+  // createSearchResults = res => res.map((e, i) => (
+  //   <div style={{paddingLeft: '3px', paddingRight: '3px', border: '1px solid red', backgroundColor: 'white', height: 300, width: 165}}>{i}</div>
+  // ))
+
   componentDidMount(){
     this.setState({
       category:this.props.category,
@@ -103,36 +110,47 @@ class Search extends Component {
     return (
       <div className="Search">
         <header className="Search-header">
-          {this.props.category}
-          {this.props.subcategory ? ' >> ' : null}
-          {this.props.subcategory ? this.props.subcategory : null}
+        {this.props.category}
+        {this.props.subcategory ? ' >> ' : null}
+        {this.props.subcategory ? this.props.subcategory : null}
         </header>
           <CategorySelection />
           <SubcategorySelection />
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name="subject"
-            type="text"
-            value={this.state.search}
-            onChange={this.handleChange}
-          />
-          <select
-            name="filter"
-            value={this.state.filter}
-            onChange={this.handleChange}
-          >
-            <option value="SUBJECT">Subject</option>
-            <option value="TITLE">Title</option>
-            <option value="AUTHOR">Author</option>
-            <option value="ISBN">ISBN</option>
-          </select>
-          <button type="submit">Search</button>
-        </form>
+          <div className="form" style={{ marginBottom: '10px',display: 'inline' }}>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                name="search"
+                type="text"
+                value={this.state.search}
+                onChange={this.handleChange}
+              />
+              <select
+                name="filter"
+                value={this.state.filter}
+                onChange={this.handleChange}
+              >
+                <option value="SUBJECT">Subject</option>
+                <option value="TITLE">Title</option>
+                <option value="AUTHOR">Author</option>
+                <option value="ISBN">ISBN</option>
+              </select>
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </header>
+        <Masonry
+          className={'grid'}
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          updateOnEachImageLoad={false}
+        >
           {this.state.response
             ? this.state.response.hasOwnProperty('RESPONSE')
             ? null
             : this.createSearchResults(this.state.response)
             : null}
+        </Masonry>
       </div>
     );
   }

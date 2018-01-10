@@ -1,110 +1,92 @@
 @import 'index.scss';
 
-body {
-    background-color: $default_background_color_light;
-  }
-  
-#root {
-    background-color: $default_background_color_light;
-    display: flex;
-    justify-content: center;
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; }
+
+.HomeNavBarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 90vw;
+  border-radius: 2em; }
+
+.HomeHeader {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  width: 90vw;
 }
 
-.App {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  
-  .HomeNavBarContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: $default_background_color_dark;
-    width: 90vw;
-    border-radius: 2em;
-  }
-  
-  .HomeHeader {
-    display: flex;
-    justify-content: center;
-    color: $primary_background_color_dark;
-    width: 90vw;
-  }
-  
-  .HomeHeader h1 {
-    font-size: 4em;
-    font-weight: 700;
-    color: $primary_color_light;
-    text-shadow: .02em .02em $primary_color_dark; 
-  }
-  
-  .LowerButtonStrip {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 90vw;
-    height: 15vh;
-  }
-  
-  .button {
-    margin: .25em;
-    display: flex;
-    justify-content: center;
-    background-color: $primary_color_light;
-    width: 10vw;
-    border: 1px solid $button_color;
-    border-radius: 2em;
-  }
-  
-  .buttonText {
-    display: flex;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    color: $button_color;
-  }
-  
-  .PageDisplay {
-    display: flex;
-    justify-content: center;
-    background-color: $default_background_color_dark;
-    width: 90vw;
-    border-radius: 2em;
-    margin-top: 1em;
-  }
-  
-  .pageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: $default_background_color_dark;
-    /* background-image: url('./images/heapsOfBooks.jpg'); */
-    width: 75vw;
-    border:1px solid $button_color;
-    border-radius: 2em;
-    margin: auto;
-  }
-  
-  input,select,button {
-    background-color: $primary_color_light;
-    border: 1px solid $button_color;
-    border-radius: 2em;
-    font-size: 2em;
-    margin-left: .25em;
-    padding-left: .25em;
-    padding-right: .35em;
-  }
-  
-  .upVotes, .downVotes {
-    padding-bottom: .35em;
-  }
-  
-  label {
-    font-size: 2em;
-    font-weight: 700;
-    color:$primary_color_light;
-    text-shadow: .02em .02em $primary_color_dark; 
-  }
+.HomeHeader h1 {
+  font-size: 4em;
+  font-weight: 700;
+  color:#565656;
+  text-shadow: .02em .02em #ffffff;
+}
+
+.LowerButtonStrip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90vw;
+  height: 15vh; }
+
+.button {
+  margin: .25em;
+  display: flex;
+  justify-content: center;
+  background-color: #eeeeee;
+  width: 10vw;
+  border: 1px solid #595991;
+  border-radius: 2em; }
+
+.buttonText {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #595991; }
+
+.pageDisplay {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 90vw;
+  /* border-radius: 2em; */
+  margin-top: 1em;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 75vw;
+  /* border:1px solid silver; */
+  /* border-radius: 2em; */
+  margin: auto;
+}
+
+input,select,button {
+  background-color: #eeeeee;
+  border: 1px solid silver;
+  border-radius: 2em;
+  font-size: 2em;
+  margin-left: .25em;
+  padding-left: .25em;
+  padding-right: .35em; }
+
+.upVotes, .downVotes {
+  padding-bottom: .35em; }
+
+label {
+  font-size: 2em;
+  font-weight: 700;
+  color:#565656;
+  text-shadow: .02em .02em ffffff;
+}
