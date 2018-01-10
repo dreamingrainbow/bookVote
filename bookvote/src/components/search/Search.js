@@ -69,7 +69,7 @@ class Search extends Component {
           break;
         case 'SUBJECT':
         default:
-          o.QUERY = this.props.search
+          o.SUBJECT = this.props.search
       }
       
       if(this.state.category !== 'All')

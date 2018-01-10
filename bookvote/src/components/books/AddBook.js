@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import url from '../../config';
-
+import Categories from '../search/Categories';
 export default class AddBook extends Component {
     constructor(){
         super();
         this.state = {
             isbn: null,
+            isbnSuggestions: [],
             title: null,
+            titleSuggestions: [],
             category: null,
+            categorySuggestions: [],
             subcategory: null,
+            subcategorySuggestions: [],
             subject: null,
+            subjectSuggestions:[],
             author: null,
+            authorSuggestions:[]
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +25,26 @@ export default class AddBook extends Component {
     handleChange(e) {
         e.preventDefault();
         let name = e.target.name;
+
+        switch(name) {
+            case 'isbn':
+                /* look up isbn numbers via external api? */
+
+            break;
+            case 'title':
+            break;
+            case 'category':
+
+            break;
+            case 'subcategory':
+
+            break;
+            case 'subject':
+            break;
+            case 'author':
+            break;
+            default:
+        }
         let value = e.target.value;
         this.setState({[name]:value});
     }
