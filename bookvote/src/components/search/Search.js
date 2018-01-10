@@ -137,7 +137,6 @@ class Search extends Component {
               <button type="submit">Search</button>
             </form>
           </div>
-        </header>
         <Masonry
           className={'grid'}
           elementType={'div'}

@@ -10,14 +10,12 @@ import HomeNavBar from './components/homeNavBar/homeNavBar';
 import SignUp from './components/users/signup';
 import SignIn from './components/users/signin';
 import AddBook from './components/books/AddBook';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { authenticate, setCategory, setSubcategory } from './actions';
 import { Categories } from './components/search/Categories';
 // CSS
 import './App.css';
 import './index.css';
-
+// Actions
+import { authenticate, setCategory, setSubcategory } from './actions';
 class App extends Component {
   componentDidMount(){
     this.pathSplit = this.props.history.location.pathname.split('/')
