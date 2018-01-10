@@ -27,31 +27,36 @@
 /* Votes */
 
 .votes {
+  /* border-top: black solid 1px; */
   position: relative;
-  align-self: flex-end;
-  margin-right: 20px;
-  margin-top: 10px;
+  align-self: flex-start;
+  /* margin-right: 20px; */
+  /* margin-top: 10px; */
   font-size: 0.5em;
-  font-weight: 600;
 }
 
 .upVotes {
-  margin-right: 5px;
+  margin-left: 5px;
+  /* margin: 0px; */
+  padding: 0px;
   color: blueviolet;
-  background-color: aliceblue;
+  background-color: transparent;
   border: none;
   text-decoration: none;
 }
 
 .downVotes {
   margin-left: 5px;
+  /* margin: 0px; */
+  padding: 0px;
   color: red;
-  background-color: aliceblue;
+  background-color: transparent;
   border: none;
   text-decoration: none;
 }
 
 .hover {
+  font-family: 'Circular-Pro-Bold';
   position: relative;
   font-weight: 300;
   -webkit-transition: color .2s ease;
@@ -101,7 +106,11 @@
 } */
 
 .bookTitle {
-  font-size: 2em;
+  font-size: 1em;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .Search-header {

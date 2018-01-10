@@ -4,11 +4,11 @@ import Search from '../search/Search';
 class PageDisplay extends Component {
   render() {
     return (
-      <div className="pageDisplay">
+      // <div className="pageDisplay">
         <div className="pageContainer">
           <Search />
         </div>
-      </div>
+      // </div>
     )
   }
 }

@@ -1,39 +1,49 @@
+// Packages
 import React, { Component } from 'react';
-import './App.css';
-import './index.css';
-import HomeNavBar from './components/homeNavBar/homeNavBar';
-import { withRouter, Switch, Route } from 'react-router-dom'; 
-import SignUp from './components/users/signup';
-import SignIn from './components/users/signin';
-import PageDisplay from './components/homepageDisplay/homepageDisplay';
-import AddBook from './components/books/AddBook';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter, Switch, Route } from 'react-router-dom';
+
+// Components
+import PageDisplay from './components/homepageDisplay/homepageDisplay';
+import HomeNavBar from './components/homeNavBar/homeNavBar';
+import SignUp from './components/users/signup';
+import SignIn from './components/users/signin';
+import AddBook from './components/books/AddBook';
+
+// Redux
 import { authenticate } from './actions';
+
+// CSS
+import './App.css';
+import './index.css';
+
 class App extends Component {
-  constructor(props) {    
+  constructor(props) {
     super(props)
-    this.state = {user:props.user};
+    this.state = { user: this.props.user };
   }
-  componentDidMount(){
-    this.setState({user:this.props.user});
+
+  componentDidMount() {
+    this.setState({ user: this.props.user });
   }
+
   render() {
     return (
       <div className="App">
         <HomeNavBar />
-        { this.props.user.token === null ?
+        {this.props.user.token === null ?
           <Switch>
-            <Route path="/" component={PageDisplay} exact />
-            <Route path="/SignUp" component={SignUp} exact />
-            <Route path="/SignIn" component={SignIn} exact />
+            <Route exact path="/" component={PageDisplay} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/SignIn" component={SignIn} />
           </Switch>
            :
           <Switch>
-            <Route path="/" component={PageDisplay} exact />
-            <Route path="/Add-A-Book" component={AddBook} exact />
+            <Route exact path="/" component={PageDisplay} />
+            <Route exact path="/Add-A-Book" component={AddBook} />
           </Switch>
-        }        
+        }
       </div>
     );
   }

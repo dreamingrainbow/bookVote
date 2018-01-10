@@ -75,10 +75,10 @@ class SearchResult extends Component {
         <h3 className="bookTitle">{bookTitle}</h3>
         <div className="votes">
           <button onClick={this.handleUpVote} className="upVotes">
-            <span role="img" aria-label="UpVote">👍</span> <span className="hover" aria-labelledby="UpVote">{upVote}</span>
+            <i className="icon-up-open" /> <span className="hover">{upVote}</span>
           </button>
           <button onClick={this.handleDownVote} className="downVotes">
-          <span role="img" aria-label="DownVote">👎</span> <span className="hover" aria-labelledby="DownVote">{downVote}</span>
+            <i className="icon-down-open" /> <span className="hover">{downVote}</span>
           </button>
         </div>
       </div>

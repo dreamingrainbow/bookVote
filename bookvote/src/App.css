@@ -1,3 +1,4 @@
+@import url(./assets/fontello-07e6c45f/css/fontello.css);
 @font-face {
   font-family: 'Circular-Pro-Book';
   src: url("./assets/fonts/lineto-circular-pro-book.eot");
@@ -27,43 +28,38 @@
   font-style: normal; }
 
 body {
-  background-color: #ffffff;
+  background-color: white;
   margin: 0;
   padding: 0;
-  font-family: 'Circular-Pro-Book', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+  font-family: "Circular-Pro-Book", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 
 h1 {
-  font-family: 'Circular-Pro-Black', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+  font-family: "Circular-Pro-Black", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 
 h2 {
-  font-family: 'Circular-Pro-Bold', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+  font-family: "Circular-Pro-Bold", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 
 h3 {
-  font-family: 'Circular-Pro-Medium', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+  font-family: "Circular-Pro-Medium", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
+
+p {
+  font-family: "Circular-Pro-Book", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 
 #root {
-  background-color: #ffffff;
+  background-color: white;
   display: flex;
   justify-content: center; }
-
-:focus {
-  outline: thin dotted white; }
 
 a, a:hover, a:visited {
   color: white;
   text-decoration: none; }
 
+:focus {
+  outline: thin dotted white; }
+
 * {
   min-height: 0;
   min-width: 0; }
-
-body {
-  background-color: #d7cec7; }
-
-#root {
-  background-color: #d7cec7;
-  display: flex;
-  justify-content: center; }
 
 .App {
   display: flex;
