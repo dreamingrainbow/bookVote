@@ -464,3 +464,4 @@ export const Categories = [
             }
         ]
     }];
+    export default Categories;

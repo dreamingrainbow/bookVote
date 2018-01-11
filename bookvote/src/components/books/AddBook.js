@@ -25,7 +25,6 @@ export default class AddBook extends Component {
     handleChange(e) {
         e.preventDefault();
         let name = e.target.name;
-
         switch(name) {
             case 'isbn':
                 /* look up isbn numbers via external api? */
@@ -34,10 +33,24 @@ export default class AddBook extends Component {
             case 'title':
             break;
             case 'category':
-
+                let test;
+                    let filtered = Categories.filter( v  => {
+                        test = v.name.match(e.target.value);
+                        return test !== null;                      
+                    })
+                    
+                this.setState({categorySuggestions:filtered})
             break;
             case 'subcategory':
-
+                if(this.state.category) {
+                    let test;
+                    let filtered = Categories.filter(v  => this.state.category === v.name);
+                    filtered = filtered[0].subcategories.filter(v  => {
+                        test = v.name.match(e.target.value);
+                        return test !== null;                      
+                    })                        
+                    this.setState({subcategorySuggestions:filtered})                
+                }
             break;
             case 'subject':
             break;
@@ -115,9 +128,16 @@ export default class AddBook extends Component {
                 <label>TITLE</label>
                 <input type="text" name="title" onChange={this.handleChange}/><br/>
                 <label>CATEGORY</label>
-                <input type="text" name="category" onChange={this.handleChange}/><br/>
+                <input type="text" name="category" onChange={this.handleChange}/>
+                {this.state && this.state.categorySuggestions.map((categorySuggestion, i) => {
+                    return <div key={i}>{categorySuggestion.name}</div>
+                })}
+                <br/>
                 <label>SUBCATEGORY</label>
-                <input type="text" name="subcategory" onChange={this.handleChange}/><br/>
+                <input type="text" name="subcategory" onChange={this.handleChange}/>
+                {this.state && this.state.subcategorySuggestions.map((subcategorySuggestion, i) => {
+                    return <div key={i}>{subcategorySuggestion.name}</div>
+                })}<br/>
                 <label>SUBJECT</label>
                 <input type="text" name="subject" onChange={this.handleChange}/><br/>
                 <label>AUTHOR</label>

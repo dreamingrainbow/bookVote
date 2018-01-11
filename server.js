@@ -73,7 +73,7 @@ server.post('/API/Search', (req, res) => {
     
     if(req.body.SUBJECT)
         q.SUBJECT = { $regex : req.body.SUBJECT, $options: 'i' };
-    
+        
     if(req.body.AUTHOR)
         q.AUTHOR = { $regex : req.body.AUTHOR, $options: 'i' };
 
