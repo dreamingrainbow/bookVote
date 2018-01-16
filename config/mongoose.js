@@ -5,9 +5,7 @@ module.exports = config => {
   mongoose.Promise = global.Promise
 
   const db = mongoose.connection
-  db.on(
-    'error',
-    console.error.bind(console, 'bookvote could not connect to the database')
-  )
+  db.on('error',
+    console.error.bind(console, 'bookvote could not connect to the database'))
   db.once('open', () => console.log('book vote is connected to the database'))
 }

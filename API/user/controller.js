@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const User = require('./schema');
+const mongoose = require('mongoose')
+const User = require('./schema')
 const { comparePass, loginErr } = require('../functions')
 
 module.exports = {
