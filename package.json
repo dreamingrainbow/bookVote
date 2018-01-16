@@ -11,16 +11,16 @@
   "author": "https://github.com/hackathon-dudes/bookVote",
   "dependencies": {
     "babel": "^6.23.0",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "css-loader": "^0.28.7",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "express-react-views": "^0.10.4",
     "mongodb": "^3.0.1",
-    "node-uuid": "^1.4.8",
-    "nodemailer": "^4.4.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7",
     "uuid": "^3.1.0"
   }
 }

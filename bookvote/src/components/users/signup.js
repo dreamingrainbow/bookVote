@@ -20,36 +20,45 @@ class SignUp extends Component {
   handleInputpassword(e) {
     this.setState({ password: e.target.value });
   }
-  saveUser(e) {
+  async saveUser(e) {
     e.preventDefault();
-    // create user variable to save to database
-    let error= [];
-    if(this.state.username.length < 8) {
-      error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try a longer username.'});
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    const login = await axios.post(`${url}/API/User/new`, newUser)
+    if (login.status === 201) {
+      this.setState({ status:'Success', message:'Account created please SignIn' })
+      this.props.history.push('/', this.state)
+    } else {
+      console.log(login)
     }
 
-    if(this.state.password.length < 8) {
-      error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try a longer password.'});
-    }
-    if(error.length === 0) {
-      const newUser = {
-        USERNAME: this.state.username,
-        PASSWORD: this.state.password
-      };
-      axios
-        .post(`${url}/API/User`, newUser)
-        .then((response) => {
-          console.log(response);
-          this.setState({status:'Success',message:'Account created please SignIn'});
-          this.props.history.push('/SignIn');
-        })
-        .catch((err) => {
-          error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try again.'});
-          this.setState({error:error});
-        });      
-    } else {
-      this.setState({error:error});
-    }
+
+    // create user variable to save to database
+    // let error = [];
+    // if (this.state.username.length < 8) {
+    //   error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try a longer username.'});
+    // }
+
+    // if(this.state.password.length < 8) {
+    //   error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try a longer password.'});
+    // }
+    // if(error.length === 0) {
+    //   axios
+    //     .post(`${url}/API/User/new`, newUser)
+    //     .then((response) => {
+    //       console.log(response);
+    //       this.setState({ status:'Success',message:'Account created please SignIn' });
+    //       this.props.history.push('/SignIn');
+    //     })
+    //     .catch((err) => {
+    //       error.push({status:'Error',message:'Seems to be an issue with your SignUp process. Please try again.'});
+    //       this.setState({error:error});
+    //     });      
+    // } else {
+    //   this.setState({error:error});
+    // }
   }
 
   render() {

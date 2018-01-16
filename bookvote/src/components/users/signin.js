@@ -24,20 +24,15 @@ class SignIn extends Component {
     this.setState({ password: e.target.value });
   }
 
-  signIn(e) {
-    e.preventDefault();    
-    axios.post(`${url}/API/User/${this.state.username}`, {PASSWORD:this.state.password})
-      .then((response) => {
-        if(response.data.RESPONSE[0] !== 'Success') {
-          this.setState({user:{username:null,token:null}, error:response.data.RESPONSE[1]});
-        } else {
-          this.props.authenticate({username:response.data.USERNAME, token:response.data.RESPONSE[1]});
-          this.props.history.push('/', this.state)
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  async signIn(e) {
+    e.preventDefault();
+    const login = await axios.post(`${url}/API/User/login`, { username: this.state.username, password:this.state.password })
+    if (login.status === 200) {
+      this.props.authenticate({ username: login.data.username, token: "Valid Login" })
+      this.props.history.push('/', this.state)
+    }
+    else
+      this.setState({ user: { username: null, token: null }, error: '400' })
   }
 
   render() {

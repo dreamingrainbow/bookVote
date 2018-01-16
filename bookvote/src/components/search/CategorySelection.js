@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { authenticate, setCategory, setSubcategory } from '../../actions';
 import { Categories } from './Categories';
+
 class CategorySelection extends Component {
     constructor(props) {
         super(props)        
